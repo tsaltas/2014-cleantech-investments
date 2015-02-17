@@ -26560,7 +26560,7 @@ $(document).ready(function() {
 
     var quarterVolumeChart = dc.pieChart('#quarter-volume');
 
-    var quarter = i3DataCrossfilter.dimension(function (d) {
+    var quarterDimension = i3DataCrossfilter.dimension(function (d) {
         var month = d.date.getMonth();
         if (month <= 2) {
             return 'Q1';
@@ -26573,13 +26573,13 @@ $(document).ready(function() {
         }
     });
 
-    var quarterVolumeGroup = quarter.group().reduceCount();
+    var quarterVolumeGroup = quarterDimension.group().reduceCount();
 
     quarterVolumeChart.width(180)
         .height(180)
         .radius(80)
         .innerRadius(30)
-        .dimension(quarter)
+        .dimension(quarterDimension)
         .group(quarterVolumeGroup)
         .label(function (d) {
             return d.data.key + ": " + d.data.value;
@@ -26593,17 +26593,17 @@ $(document).ready(function() {
 
     var corpChart = dc.pieChart('#corporates');
 
-    var corp = i3DataCrossfilter.dimension(function (d) {
+    var corpDimension = i3DataCrossfilter.dimension(function (d) {
         return d.corpinvestor;
     });
 
-    var corpVolumeGroup = corp.group().reduceCount();
+    var corpVolumeGroup = corpDimension.group().reduceCount();
 
     corpChart.width(180)
         .height(180)
         .radius(80)
         .innerRadius(30)
-        .dimension(corp)
+        .dimension(corpDimension)
         .group(corpVolumeGroup)
         .label(function (d) {
             return d.data.key + ": " + d.data.value;
@@ -26630,6 +26630,38 @@ $(document).ready(function() {
         .dimension(sectorDealDimension)
         .group(sectorDealGroup)
         .renderLabel(false);
+
+    /********************************************************
+    *														*
+    * 	Bar chart: Investment ($) by sector                 *
+    *														*
+    ********************************************************/
+    
+    var sectorDollarChart = dc.rowChart("#sector-dollars");
+
+    var sectorDollarDimension = i3DataCrossfilter.dimension(function (d) {
+        return d.primarysector;
+    });
+
+    var sectorDollarGroup = sectorDollarDimension.group().reduceSum(function(d) {
+        return d.amount / 1000000
+    });
+
+    sectorDollarChart
+        .width(300)
+        .height(500)
+        .margins({top: 20, left: 10, right: 10, bottom: 20})
+        .transitionDuration(750)
+        .dimension(sectorDollarDimension)
+        .group(sectorDollarGroup)
+        .renderLabel(true)
+        .title(function (d) { return d.key + ": " + Math.round(d.value); })
+        .gap(9)
+        .elasticX(true)
+        .ordering(function(d){ return -d.value })
+        .xAxis().ticks(5).tickFormat(d3.format("d"));
+
+    sectorDollarChart.labelOffsetY(11.5);
 
     // Total investment by year ($ and volume)
     // Total investment by quarter ($ and volume)

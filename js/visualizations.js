@@ -26505,6 +26505,7 @@ $(document).ready(function() {
             for (var key in data[i]) {
                 // rename properties to lower case
                 // remove spaces in key names
+                // remove question marks in key names
                 if (data[i].hasOwnProperty(key)) {
                     var new_key = key.toLowerCase();
                     new_key = new_key.replace(" ", '');
@@ -26607,6 +26608,28 @@ $(document).ready(function() {
         .label(function (d) {
             return d.data.key + ": " + d.data.value;
         })
+
+    /********************************************************
+    *														*
+    * 	Pie chart: Dollars and Deals by sector              *
+    *														*
+    ********************************************************/
+
+    var sectorDealChart = dc.pieChart('#sector-deals');
+
+    var sectorDealDimension = i3DataCrossfilter.dimension(function (d) {
+        return d.primarysector;
+    });
+
+    var sectorDealGroup = sectorDealDimension.group().reduceCount();
+
+    sectorDealChart.width(180)
+        .height(180)
+        .radius(80)
+        .innerRadius(30)
+        .dimension(sectorDealDimension)
+        .group(sectorDealGroup)
+        .renderLabel(false);
 
     // Total investment by year ($ and volume)
     // Total investment by quarter ($ and volume)

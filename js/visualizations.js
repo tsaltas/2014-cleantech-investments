@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    "use strict";
+
     /********************************************************
     *														*
     * 	Load and clean up data          					*
@@ -7,9 +9,6 @@ $(document).ready(function() {
     ********************************************************/
     // load data
     // hard-coded for now, can't load local files in browser
-
-    "use strict";
-
     var i3Data = [
     {
         "Company": "2DHeat",
@@ -26551,6 +26550,31 @@ $(document).ready(function() {
 
     // create crossfilter
     var i3DataCrossfilter = crossfilter(i3Data);
+
+    // tooltips for row chart
+    var g;
+    var numberFormat = d3.format(",f");
+
+    var tip = d3.tip()
+        .attr('class', 'd3-tip')
+        .offset([-10, 0])
+        .html(function (d) { return "<span style='color: #99d8c9'>" +  d.key + "</span> : "  + numberFormat(d.value); });
+
+    // tooltips for pie chart
+    var pieTip = d3.tip()
+        .attr('class', 'd3-tip')
+        .offset([-10, 0])
+        .html(function (d) { return "<span style='color: #99d8c9'>" +  d.data.key + "</span> : "  + numberFormat(d.value); });
+
+    // tooltips for bar chart
+    //var barTip = d3.tip()
+    //    .attr('class', 'd3-tip')
+    //    .offset([-10, 0])
+    //    .html(function (d) { return "<span style='color: #f0027f'>" + d.data.key + "</span> : " + numberFormat(d.y);});
+
+    // set colors to red <--> purple
+    var colorScheme = ["#d9ef8b","#a6d96a","#66bd63","#D9EDF7","#ccece6", "#e6f5d0","#b8e186","#7fbc41","#99d8c9","#41ae76","#238b45","#ccebc5","#e0f3db","#78c679","#41ab5d"].reverse();
+
     
     /********************************************************
     *														*
@@ -26581,6 +26605,7 @@ $(document).ready(function() {
         .innerRadius(30)
         .dimension(quarterDimension)
         .group(quarterVolumeGroup)
+        .colors(colorScheme)
         .label(function (d) {
             return d.data.key + ": " + d.data.value;
         })
@@ -26605,6 +26630,7 @@ $(document).ready(function() {
         .innerRadius(30)
         .dimension(corpDimension)
         .group(corpVolumeGroup)
+        .colors(colorScheme)
         .label(function (d) {
             return d.data.key + ": " + d.data.value;
         })
@@ -26629,7 +26655,8 @@ $(document).ready(function() {
         .innerRadius(30)
         .dimension(sectorDealDimension)
         .group(sectorDealGroup)
-        .renderLabel(false);
+        .renderLabel(false)
+        .colors(colorScheme)
 
     /********************************************************
     *														*
@@ -26655,11 +26682,13 @@ $(document).ready(function() {
         .dimension(sectorDollarDimension)
         .group(sectorDollarGroup)
         .renderLabel(true)
+        .colors(colorScheme)
         .title(function (d) { return d.key + ": " + Math.round(d.value); })
         .gap(9)
         .elasticX(true)
         .ordering(function(d){ return -d.value })
-        .xAxis().ticks(5).tickFormat(d3.format("d"));
+        .xAxis().ticks(5).tickFormat(d3.format("d"))
+
 
     sectorDollarChart.labelOffsetY(11.5);
 
@@ -26686,4 +26715,25 @@ $(document).ready(function() {
 
     // render all charts
     dc.renderAll();
+
+    /*
+    // rotate labels
+    d3.selectAll("g.x text")
+        .attr("class", "sectorLabel")
+        .style("text-anchor", "end") 
+        .attr("transform", "translate(-10,0)rotate(315)");
+    d3.selectAll(".bar").call(barTip);
+    d3.selectAll(".bar").on('mouseover', barTip.show)
+                    //.on('mouseout', barTip.hide);
+    */
+
+    d3.selectAll("g.row").call(tip);
+        d3.selectAll("g.row").on('mouseover', tip.show)
+        .on('mouseout', tip.hide);
+
+    d3.selectAll("g.pie-slice").call(pieTip);
+    d3.selectAll("g.pie-slice").on('mouseover', pieTip.show)
+        .on('mouseout', pieTip.hide);
+
+
 });

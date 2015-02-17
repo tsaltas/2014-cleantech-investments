@@ -26499,18 +26499,18 @@ $(document).ready(function() {
     }];
 
     // clean up data
-    function clean_up(data) {
+    function cleanUp(data) {
         for (var i = 0; i < data.length; i++) {
             for (var key in data[i]) {
                 // rename properties to lower case
                 // remove spaces in key names
                 // remove question marks in key names
                 if (data[i].hasOwnProperty(key)) {
-                    var new_key = key.toLowerCase();
-                    new_key = new_key.replace(" ", '');
-                    new_key = new_key.replace("?", '');
+                    var newKey = key.toLowerCase();
+                    newKey = newKey.replace(" ", '');
+                    newKey = newKey.replace("?", '');
                 
-                    data[i][new_key] = data[i][key];
+                    data[i][newKey] = data[i][key];
                     delete data[i][key];
                 }
             }
@@ -26546,16 +26546,17 @@ $(document).ready(function() {
         }
     };
 
-    clean_up(i3Data);
+    cleanUp(i3Data);
 
     // create crossfilter
     var i3DataCrossfilter = crossfilter(i3Data);
 
-    // tooltips for row chart
+    // tooltips
     var g;
     var numberFormat = d3.format(",f");
-
-    var tip = d3.tip()
+    
+    // tooltips for row chart
+    var rowTip = d3.tip()
         .attr('class', 'd3-tip')
         .offset([-10, 0])
         .html(function (d) { return "<span style='color: #99d8c9'>" +  d.key + "</span> : "  + numberFormat(d.value); });
@@ -26566,13 +26567,19 @@ $(document).ready(function() {
         .offset([-10, 0])
         .html(function (d) { return "<span style='color: #99d8c9'>" +  d.data.key + "</span> : "  + numberFormat(d.value); });
 
-    // tooltips for bar chart
+    // tooltips for bar chart - number
     var barTip = d3.tip()
         .attr('class', 'd3-tip')
         .offset([-10, 0])
         .html(function (d) { return "<span style='color: #99d8c9'>" + d.data.key + "</span> : " + numberFormat(d.y);});
+    
+    // tooltips for bubble chart
+    var bubbleTip = d3.tip()
+        .attr('class', 'd3-tip')
+        .offset([-10, 0])
+        .html(function (d) { return "<span style='color: #99d8c9'>" + d.key + "</span> : $" + numberFormat(d.value.avgSize) + "MM";});
 
-    // set colors to red <--> purple
+    // set colors to shades of green
     var colorScheme = ["#a6d96a","#66bd63","#D9EDF7","#ccece6", "#e6f5d0","#b8e186","#7fbc41","#99d8c9","#41ae76","#238b45","#78c679","#41ab5d", "#4eb953"].reverse();
 
     /********************************************************
@@ -26627,7 +26634,10 @@ $(document).ready(function() {
         )
         .colors(colorScheme)
         .xUnits(dc.units.ordinal)
-        .yAxisLabel('2014 Deals') 
+        .yAxisLabel('2014 Deals')
+        .title(function(d) {
+            return "";
+        });
 
     quarterlyDollarChart.width(420)
         .height(180)
@@ -26641,7 +26651,10 @@ $(document).ready(function() {
         )
         .colors(colorScheme)
         .xUnits(dc.units.ordinal)
-        .yAxisLabel('$MM') 
+        .yAxisLabel('$MM')
+        .title(function(d) {
+            return "";
+        });
 
     /********************************************************
     *														*
@@ -26661,6 +26674,7 @@ $(document).ready(function() {
         .label(function (d) {
             return d.data.key + ": " + d.data.value;
         })
+        .renderTitle(false)
 
     /********************************************************
     *														*
@@ -26686,6 +26700,7 @@ $(document).ready(function() {
         .label(function (d) {
             return d.data.key + ": " + d.data.value;
         })
+        .renderTitle(false)
 
     /********************************************************
     *														*
@@ -26712,18 +26727,36 @@ $(document).ready(function() {
         };
     });
 
+    var stageFilterDimension = i3DataCrossfilter.dimension(function (d) {
+        var stage = d.investmenttype;
+        switch(stage) {
+            case "Growth Equity":
+                return "Growth"
+                break;
+            case "Series A":
+                return "A"
+                break;
+            case "Series B":
+                return "B"
+                break;
+            default:
+                return stage;
+        };
+    });
+
     var stageVolumeGroup = stageDimension.group().reduceCount();
 
     stageChart.width(180)
         .height(180)
         .radius(80)
         .innerRadius(30)
-        .dimension(stageDimension)
+        .dimension(stageFilterDimension)
         .group(stageVolumeGroup)
         .colors(colorScheme)
         .label(function (d) {
             return d.data.key + ": " + d.data.value;
         })
+        .renderTitle(false)
 
     /********************************************************
     *														*
@@ -26733,19 +26766,24 @@ $(document).ready(function() {
 
     var sectorDealChart = dc.pieChart('#sector-deals');
 
-    var sectorDealDimension = i3DataCrossfilter.dimension(function (d) {
+    var sectorDimension = i3DataCrossfilter.dimension(function (d) {
         return d.primarysector;
     });
 
-    var sectorDealGroup = sectorDealDimension.group().reduceCount();
+    var sectorFilterDimension = i3DataCrossfilter.dimension(function (d) {
+        return d.primarysector;
+    });
+
+    var sectorDealGroup = sectorDimension.group().reduceCount();
 
     sectorDealChart.width(180)
         .height(180)
         .radius(80)
         .innerRadius(30)
-        .dimension(sectorDealDimension)
+        .dimension(sectorFilterDimension)
         .group(sectorDealGroup)
         .renderLabel(false)
+        .renderTitle(false)
         .colors(colorScheme);
 
     /********************************************************
@@ -26760,7 +26798,7 @@ $(document).ready(function() {
         return d.primarysector;
     });
 
-    var sectorDollarGroup = sectorDollarDimension.group().reduceSum(function(d) {
+    var sectorDollarGroup = sectorDimension.group().reduceSum(function(d) {
         return d.amount / 1000000;
     });
 
@@ -26769,15 +26807,16 @@ $(document).ready(function() {
         .height(500)
         .margins({top: 20, left: 10, right: 10, bottom: 20})
         .transitionDuration(750)
-        .dimension(sectorDollarDimension)
+        .dimension(sectorFilterDimension)
         .group(sectorDollarGroup)
         .renderLabel(true)
         .colors(colorScheme)
-        .title(function (d) { return d.key + ": " + Math.round(d.value); })
         .gap(9)
         .elasticX(true)
+        .renderTitle(false)
         .ordering(function(d){ return -d.value })
         .xAxis().ticks(5).tickFormat(d3.format("d"));
+
 
     sectorDollarChart.labelOffsetY(11.5);
 
@@ -26788,6 +26827,242 @@ $(document).ready(function() {
     ********************************************************/
 
     var sectorBubbleChart = dc.bubbleChart('#sector-bubble-chart');
+
+    var sectorBubbleGroup = sectorDimension.group().reduce(
+        /* callback for when data is added to the current filter results */
+        function (p, v) {
+            ++p.dealCount;
+            p.dealDollars += v.amount / 1000000;
+            p.avgSize = p.dealDollars / p.dealCount;
+            return p;
+        },
+        /* callback for when data is removed from the current filter results */
+        function (p, v) {
+            --p.dealCount;
+            p.dealDollars -= v.amount / 1000000;
+            p.avgSize = p.dealDollars / p.dealCount;
+            return p;
+        },
+        /* initialize p */
+        function () {
+            return {
+                dealCount: 0,
+                dealDollars: 0,
+                avgSize: 0
+            };
+        }
+    );
+
+    sectorBubbleChart
+        .width(990)
+        .height(300)
+        .transitionDuration(1500)
+        .margins({top: 10, right: 50, bottom: 40, left: 50})
+        .dimension(sectorFilterDimension)
+        .group(sectorBubbleGroup)
+        .colors(colorScheme)
+        .colorAccessor(function (d) {
+            return d.value.dealDollars;
+        })
+        .keyAccessor(function (p) {
+            return p.value.dealCount;
+        })
+        .valueAccessor(function (p) {
+            return p.value.dealDollars;
+        })
+        .radiusValueAccessor(function (p) {
+            return p.value.avgSize;
+        })
+        .maxBubbleRelativeSize(0.07)
+        .elasticY(true)
+        .elasticX(true)        
+        .renderHorizontalGridLines(true)
+        .renderVerticalGridLines(true)
+        .xAxisLabel('Number of deals')
+        .yAxisLabel('Dollars invested ($MM)')
+
+        // specify axes
+        var xRange = d3.extent(sectorBubbleGroup.all(), function(d) {
+                return d.value.dealCount;
+        });
+
+        var yRange = d3.extent(sectorBubbleGroup.all(), function(d) {
+                return d.value.dealDollars;
+        });
+
+        var rRange = d3.extent(sectorBubbleGroup.all(), function(d) {
+            return d.value.avgSize;
+        });
+
+        sectorBubbleChart
+            .x(d3.scale.linear().domain(xRange))
+            .xAxisPadding(xRange[1]/10)
+            .y(d3.scale.linear().domain(yRange))
+            .yAxisPadding(yRange[1]/5)
+            .r(d3.scale.linear().domain(rRange));
+        
+
+    /********************************************************
+    *														*
+    * 	Bubble chart: Stage deal size                       *
+    *														*
+    ********************************************************/
+
+    var stageBubbleChart = dc.bubbleChart('#stage-bubble-chart');
+
+    var stageBubbleGroup = stageDimension.group().reduce(
+        /* callback for when data is added to the current filter results */
+        function (p, v) {
+            ++p.dealCount;
+            p.dealDollars += v.amount / 1000000;
+            p.avgSize = p.dealDollars / p.dealCount;
+            return p;
+        },
+        /* callback for when data is removed from the current filter results */
+        function (p, v) {
+            --p.dealCount;
+            p.dealDollars -= v.amount / 1000000;
+            p.avgSize = p.dealDollars / p.dealCount;
+            return p;
+        },
+        /* initialize p */
+        function () {
+            return {
+                dealCount: 0,
+                dealDollars: 0,
+                avgSize: 0
+            };
+        }
+    );
+
+    stageBubbleChart
+        .width(990)
+        .height(300)
+        .transitionDuration(1500)
+        .margins({top: 10, right: 50, bottom: 40, left: 50})
+        .dimension(stageFilterDimension)
+        .group(stageBubbleGroup)
+        .colors(colorScheme)
+        .colorAccessor(function (d) {
+            return d.value.dealCount;
+        })
+        .keyAccessor(function (p) {
+            return p.value.dealCount;
+        })
+        .valueAccessor(function (p) {
+            return p.value.dealDollars;
+        })
+        .radiusValueAccessor(function (p) {
+            return p.value.avgSize;
+        })
+        .maxBubbleRelativeSize(0.07)
+        .elasticY(true)
+        .elasticX(true)        
+        .renderHorizontalGridLines(true)
+        .renderVerticalGridLines(true)
+        .xAxisLabel('Number of deals')
+        .yAxisLabel('Dollars invested ($MM)')
+
+        // specify axes
+        var xRange = d3.extent(stageBubbleGroup.all(), function(d) {
+                return d.value.dealCount;
+        });
+
+        var yRange = d3.extent(stageBubbleGroup.all(), function(d) {
+                return d.value.dealDollars;
+        });
+
+        var rRange = d3.extent(stageBubbleGroup.all(), function(d) {
+            return d.value.avgSize;
+        });
+
+        stageBubbleChart
+            .x(d3.scale.linear().domain(xRange))
+            .xAxisPadding(xRange[1]/10)
+            .y(d3.scale.linear().domain(yRange))
+            .yAxisPadding(yRange[1]/5)
+            .r(d3.scale.linear().domain(rRange));
+
+    /********************************************************
+    *														*
+    * 	Bubble chart: Stage deal size                       *
+    *														*
+    ********************************************************/
+
+    var stageBubbleChart = dc.bubbleChart('#stage-bubble-chart');
+
+    var stageBubbleGroup = stageDimension.group().reduce(
+        /* callback for when data is added to the current filter results */
+        function (p, v) {
+            ++p.dealCount;
+            p.dealDollars += v.amount / 1000000;
+            p.avgSize = p.dealDollars / p.dealCount;
+            return p;
+        },
+        /* callback for when data is removed from the current filter results */
+        function (p, v) {
+            --p.dealCount;
+            p.dealDollars -= v.amount / 1000000;
+            p.avgSize = p.dealDollars / p.dealCount;
+            return p;
+        },
+        /* initialize p */
+        function () {
+            return {
+                dealCount: 0,
+                dealDollars: 0,
+                avgSize: 0
+            };
+        }
+    );
+
+    stageBubbleChart
+        .width(990)
+        .height(300)
+        .transitionDuration(1500)
+        .margins({top: 10, right: 50, bottom: 40, left: 50})
+        .dimension(stageFilterDimension)
+        .group(stageBubbleGroup)
+        .colors(colorScheme)
+        .colorAccessor(function (d) {
+            return d.value.dealDollars;
+        })
+        .keyAccessor(function (p) {
+            return p.value.dealCount;
+        })
+        .valueAccessor(function (p) {
+            return p.value.dealDollars;
+        })
+        .radiusValueAccessor(function (p) {
+            return p.value.avgSize;
+        })
+        .maxBubbleRelativeSize(0.07)
+        .elasticY(true)
+        .elasticX(true)        
+        .renderHorizontalGridLines(true)
+        .renderVerticalGridLines(true)
+        .xAxisLabel('Number of deals')
+        .yAxisLabel('Dollars invested ($MM)')
+
+        // specify axes
+        var xRange = d3.extent(stageBubbleGroup.all(), function(d) {
+                return d.value.dealCount;
+        });
+
+        var yRange = d3.extent(stageBubbleGroup.all(), function(d) {
+                return d.value.dealDollars;
+        });
+
+        var rRange = d3.extent(stageBubbleGroup.all(), function(d) {
+            return d.value.avgSize;
+        });
+
+        stageBubbleChart
+            .x(d3.scale.linear().domain(xRange))
+            .xAxisPadding(xRange[1]/10)
+            .y(d3.scale.linear().domain(yRange))
+            .yAxisPadding(yRange[1]/5)
+            .r(d3.scale.linear().domain(rRange));
 
 
     /********************************************************
@@ -26817,13 +27092,18 @@ $(document).ready(function() {
         .on('mouseout', barTip.hide);
     
 
-    d3.selectAll("g.row").call(tip);
+    d3.selectAll("g.row").call(rowTip);
     d3.selectAll("g.row")
-        .on('mouseover', tip.show)
-        .on('mouseout', tip.hide);
+        .on('mouseover', rowTip.show)
+        .on('mouseout', rowTip.hide);
 
     d3.selectAll("g.pie-slice").call(pieTip);
     d3.selectAll("g.pie-slice")
         .on('mouseover', pieTip.show)
         .on('mouseout', pieTip.hide);
+    
+    d3.selectAll(".bubble").call(bubbleTip);
+    d3.selectAll(".bubble")
+        .on('mouseover', bubbleTip.show)
+        .on('mouseout', bubbleTip.hide);
 });

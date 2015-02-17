@@ -9,6 +9,8 @@
   <script type="text/javascript" src="js/crossfilter.js"></script>
   <script type="text/javascript" src="js/dc.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <!-- Load Shannon's script -->
+  <script type="text/javascript" src="js/visualizations.js"></script>
 
   <!-- Load CSS -->
   <link rel="stylesheet" type="text/css" href="css/dc.css"/>
@@ -32,51 +34,56 @@
 
   body {
     min-height: 2000px;
-    padding-top: 120px;
+    padding-top: 50px;
     }
 
 </style>
 
 <body>
-<!-- Load Shannon's script -->
-  <script type="text/javascript" src="js/visualizations.js"></script>
+  <div class="container" id="expenditures-container">
+    <div class="row">
+      <div id='dc-data-count'>
+        <span class='filter-count'></span>selected out of <span class='total-count'></span> records
+      </div>
+    </div>
 
-  <div id='dc-data-count'>
-    <span class='filter-count'></span> selected out of <span class='total-count'></span> records
-  </div>
+    <br>
+    
+    <div class="row">
+      <div id="quarter-volume">
+        <span class="chart-title">Deals by quarter</span>
+        <span class="reset" style="display: none;">range: <span class="filter"></span></span>
+        <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
 
-  <br>
-  <br>
-  
-  <div id="quarter-volume">
-    <span class="chart-title">Deals by quarter</span>
-    <span class="reset" style="display: none;">range: <span class="filter"></span></span>
-    <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
+        <div class="clearfix"></div>
+      </div>
 
-    <div class="clearfix"></div>
-  </div>
+      <div id="corporates">
+        <span class="chart-title">Deals with corporate participation</span>
+        <span class="reset" style="display: none;">range: <span class="filter"></span></span>
+        <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
 
-  <div id="corporates">
-    <span class="chart-title">Deals with corporate participation</span>
-    <span class="reset" style="display: none;">range: <span class="filter"></span></span>
-    <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
+        <div class="clearfix"></div>
+      </div>
+    </div>
 
-    <div class="clearfix"></div>
-  </div>
-  <div id="sector-deals">
-    <span class="chart-title">Deals by sector</span>
-    <span class="reset" style="display: none;">range: <span class="filter"></span></span>
-    <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
+    <br>
 
-    <div class="clearfix"></div>
-  </div>
- 
-  <div id="sector-dollars">
-    <span class="chart-title">Investment by sector ($MM)</span>
-    <span class="reset" style="display: none;">range: <span class="filter"></span></span>
-    <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
+    <div class="row">
+      <div id="sector-dollars">
+        <span class="chart-title">Investment by sector ($MM)</span>
+        <span class="reset" style="display: none;">range: <span class="filter"></span></span>
+        <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
 
-    <div class="clearfix"></div>
-  </div> 
+        <div class="clearfix"></div>
+      </div> 
+
+      <div id="sector-deals">
+        <span class="chart-title">Deals by sector</span>
+        <span class="reset" style="display: none;">range: <span class="filter"></span></span>
+        <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
+
+      <div class="clearfix"></div>
+    </div>
 
 </body>

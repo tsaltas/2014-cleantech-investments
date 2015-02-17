@@ -26507,7 +26507,8 @@ $(document).ready(function() {
                 // remove spaces in key names
                 if (data[i].hasOwnProperty(key)) {
                     var new_key = key.toLowerCase();
-                    new_key = new_key.replace(/\s+/g, '');
+                    new_key = new_key.replace(" ", '');
+                    new_key = new_key.replace("?", '');
                 
                     data[i][new_key] = data[i][key];
                     delete data[i][key];
@@ -26552,11 +26553,10 @@ $(document).ready(function() {
     
     /********************************************************
     *														*
-    * 	Pie charts: investment $ and volume by quarter      *
+    * 	Pie chart: Deals by quarter                         *
     *														*
     ********************************************************/
 
-    var quarterDollarChart = dc.pieChart('#quarter-dollars');
     var quarterVolumeChart = dc.pieChart('#quarter-volume');
 
     var quarter = i3DataCrossfilter.dimension(function (d) {
@@ -26572,40 +26572,41 @@ $(document).ready(function() {
         }
     });
 
-    var quarterFilter = i3DataCrossfilter.dimension(function (d) {
-        var month = d.date.getMonth();
-        if (month <= 2) {
-            return 'Q1';
-        } else if (month > 2 && month <= 5) {
-            return 'Q2';
-        } else if (month > 5 && month <= 8) {
-            return 'Q3';
-        } else {
-            return 'Q4';
-        }
-    });
-
-    var quarterDollarGroup = quarter.group().reduceSum(function (d) {
-        return d.amount;
-    });
-
-    var quarterVolumeGroup = quarterFilter.group().reduceCount();
-
-    quarterDollarChart.width(180)
-        .height(180)
-        .radius(80)
-        .innerRadius(30)
-        .dimension(quarter)
-        .group(quarterDollarGroup)
+    var quarterVolumeGroup = quarter.group().reduceCount();
 
     quarterVolumeChart.width(180)
         .height(180)
         .radius(80)
         .innerRadius(30)
-        .dimension(quarterFilter)
+        .dimension(quarter)
         .group(quarterVolumeGroup)
+        .label(function (d) {
+            return d.data.key + ": " + d.data.value;
+        })
 
-        
+    /********************************************************
+    *														*
+    * 	Pie chart: Deals by corporate participation         *
+    *														*
+    ********************************************************/
+
+    var corpChart = dc.pieChart('#corporates');
+
+    var corp = i3DataCrossfilter.dimension(function (d) {
+        return d.corpinvestor;
+    });
+
+    var corpVolumeGroup = corp.group().reduceCount();
+
+    corpChart.width(180)
+        .height(180)
+        .radius(80)
+        .innerRadius(30)
+        .dimension(corp)
+        .group(corpVolumeGroup)
+        .label(function (d) {
+            return d.data.key + ": " + d.data.value;
+        })
 
     // Total investment by year ($ and volume)
     // Total investment by quarter ($ and volume)

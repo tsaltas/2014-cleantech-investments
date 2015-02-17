@@ -26575,14 +26575,14 @@ $(document).ready(function() {
     // set colors to red <--> purple
     var colorScheme = ["#d9ef8b","#a6d96a","#66bd63","#D9EDF7","#ccece6", "#e6f5d0","#b8e186","#7fbc41","#99d8c9","#41ae76","#238b45","#ccebc5","#e0f3db","#78c679","#41ab5d"].reverse();
 
-    
     /********************************************************
     *														*
-    * 	Pie chart: Deals by quarter                         *
+    * 	Bar charts: Deals by quarter                        *
     *														*
     ********************************************************/
-
-    var quarterVolumeChart = dc.pieChart('#quarter-volume');
+    
+    var quarterlyVolumeChart = dc.barChart('#quarterly-volume');
+    var quarterlyDollarChart = dc.barChart('#quarterly-dollars');
 
     var quarterDimension = i3DataCrossfilter.dimension(function (d) {
         var month = d.date.getMonth();
@@ -26597,13 +26597,65 @@ $(document).ready(function() {
         }
     });
 
+    var quarterFilterDimension = i3DataCrossfilter.dimension(function (d) {
+        var month = d.date.getMonth();
+        if (month <= 2) {
+            return 'Q1';
+        } else if (month > 2 && month <= 5) {
+            return 'Q2';
+        } else if (month > 5 && month <= 8) {
+            return 'Q3';
+        } else {
+            return 'Q4';
+        }
+    });
+
     var quarterVolumeGroup = quarterDimension.group().reduceCount();
+    var quarterDollarGroup = quarterDimension.group().reduceSum(function(d) {
+        return d.amount / 1000000;
+    });
+
+    quarterlyVolumeChart.width(420)
+        .height(180)
+        .margins({top: 10, right: 50, bottom: 30, left: 50})
+        .dimension(quarterFilterDimension)
+        .group(quarterVolumeGroup)
+        .elasticY(true)
+        .gap(15)
+        .x(d3.scale.ordinal()
+            .domain(["Q1", "Q2", "Q3", "Q4"])
+        )
+        .colors(colorScheme)
+        .xUnits(dc.units.ordinal)
+        .yAxisLabel('2014 Deals') 
+
+    quarterlyDollarChart.width(420)
+        .height(180)
+        .margins({top: 10, right: 50, bottom: 30, left: 50})
+        .dimension(quarterFilterDimension)
+        .group(quarterDollarGroup)
+        .elasticY(true)
+        .gap(15)
+        .x(d3.scale.ordinal()
+            .domain(["Q1", "Q2", "Q3", "Q4"])
+        )
+        .colors(colorScheme)
+        .xUnits(dc.units.ordinal)
+        .yAxisLabel('$MM') 
+
+    /********************************************************
+    *														*
+    * 	Pie chart: Deals by quarter                         *
+    *														*
+    ********************************************************/
+
+    var quarterVolumeChart = dc.pieChart('#quarter-volume');
 
     quarterVolumeChart.width(180)
         .height(180)
         .radius(80)
         .innerRadius(30)
-        .dimension(quarterDimension)
+        .dimension(quarterFilterDimension)
         .group(quarterVolumeGroup)
         .colors(colorScheme)
         .label(function (d) {
@@ -26656,11 +26708,11 @@ $(document).ready(function() {
         .dimension(sectorDealDimension)
         .group(sectorDealGroup)
         .renderLabel(false)
-        .colors(colorScheme)
+        .colors(colorScheme);
 
     /********************************************************
     *														*
-    * 	Bar chart: Investment ($) by sector                 *
+    * 	Row chart: Investment ($) by sector                 *
     *														*
     ********************************************************/
     
@@ -26671,7 +26723,7 @@ $(document).ready(function() {
     });
 
     var sectorDollarGroup = sectorDollarDimension.group().reduceSum(function(d) {
-        return d.amount / 1000000
+        return d.amount / 1000000;
     });
 
     sectorDollarChart
@@ -26687,8 +26739,7 @@ $(document).ready(function() {
         .gap(9)
         .elasticX(true)
         .ordering(function(d){ return -d.value })
-        .xAxis().ticks(5).tickFormat(d3.format("d"))
-
+        .xAxis().ticks(5).tickFormat(d3.format("d"));
 
     sectorDollarChart.labelOffsetY(11.5);
 

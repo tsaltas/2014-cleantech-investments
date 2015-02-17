@@ -26567,13 +26567,13 @@ $(document).ready(function() {
         .html(function (d) { return "<span style='color: #99d8c9'>" +  d.data.key + "</span> : "  + numberFormat(d.value); });
 
     // tooltips for bar chart
-    //var barTip = d3.tip()
-    //    .attr('class', 'd3-tip')
-    //    .offset([-10, 0])
-    //    .html(function (d) { return "<span style='color: #f0027f'>" + d.data.key + "</span> : " + numberFormat(d.y);});
+    var barTip = d3.tip()
+        .attr('class', 'd3-tip')
+        .offset([-10, 0])
+        .html(function (d) { return "<span style='color: #99d8c9'>" + d.data.key + "</span> : " + numberFormat(d.y);});
 
     // set colors to red <--> purple
-    var colorScheme = ["#d9ef8b","#a6d96a","#66bd63","#D9EDF7","#ccece6", "#e6f5d0","#b8e186","#7fbc41","#99d8c9","#41ae76","#238b45","#ccebc5","#e0f3db","#78c679","#41ab5d"].reverse();
+    var colorScheme = ["#a6d96a","#66bd63","#D9EDF7","#ccece6", "#e6f5d0","#b8e186","#7fbc41","#99d8c9","#41ae76","#238b45","#78c679","#41ab5d", "#4eb953"].reverse();
 
     /********************************************************
     *														*
@@ -26689,6 +26689,44 @@ $(document).ready(function() {
 
     /********************************************************
     *														*
+    * 	Pie chart: Deals by stage                           *
+    *														*
+    ********************************************************/
+
+    var stageChart = dc.pieChart('#stage');
+
+    var stageDimension = i3DataCrossfilter.dimension(function (d) {
+        var stage = d.investmenttype;
+        switch(stage) {
+            case "Growth Equity":
+                return "Growth"
+                break;
+            case "Series A":
+                return "A"
+                break;
+            case "Series B":
+                return "B"
+                break;
+            default:
+                return stage;
+        };
+    });
+
+    var stageVolumeGroup = stageDimension.group().reduceCount();
+
+    stageChart.width(180)
+        .height(180)
+        .radius(80)
+        .innerRadius(30)
+        .dimension(stageDimension)
+        .group(stageVolumeGroup)
+        .colors(colorScheme)
+        .label(function (d) {
+            return d.data.key + ": " + d.data.value;
+        })
+
+    /********************************************************
+    *														*
     * 	Pie chart: Dollars and Deals by sector              *
     *														*
     ********************************************************/
@@ -26743,17 +26781,15 @@ $(document).ready(function() {
 
     sectorDollarChart.labelOffsetY(11.5);
 
-    // Total investment by year ($ and volume)
-    // Total investment by quarter ($ and volume)
-    // Total investment broken down by quarter ($ and volume)
-    // Corp deal volume and % of deals with corporate participation
-    // Average deal size, total and by stage
-    // Deal volume by stage over time
-    // Investment by sector
-    // Sector share of investment ($ and volume)
-    // Top investors ($ and deals)
+    /********************************************************
+    *														*
+    * 	Bubble chart: Sector deal size                      *
+    *														*
+    ********************************************************/
 
-            
+    var sectorBubbleChart = dc.bubbleChart('#sector-bubble-chart');
+
+
     /********************************************************
     *														*
     * 	Metrics and widgets for entire page                 *
@@ -26768,23 +26804,26 @@ $(document).ready(function() {
     dc.renderAll();
 
     /*
-    // rotate labels
+    // rotate bar chart labels
     d3.selectAll("g.x text")
         .attr("class", "sectorLabel")
         .style("text-anchor", "end") 
         .attr("transform", "translate(-10,0)rotate(315)");
-    d3.selectAll(".bar").call(barTip);
-    d3.selectAll(".bar").on('mouseover', barTip.show)
-                    //.on('mouseout', barTip.hide);
     */
 
+    d3.selectAll(".bar").call(barTip);
+    d3.selectAll(".bar")
+        .on('mouseover', barTip.show)
+        .on('mouseout', barTip.hide);
+    
+
     d3.selectAll("g.row").call(tip);
-        d3.selectAll("g.row").on('mouseover', tip.show)
+    d3.selectAll("g.row")
+        .on('mouseover', tip.show)
         .on('mouseout', tip.hide);
 
     d3.selectAll("g.pie-slice").call(pieTip);
-    d3.selectAll("g.pie-slice").on('mouseover', pieTip.show)
+    d3.selectAll("g.pie-slice")
+        .on('mouseover', pieTip.show)
         .on('mouseout', pieTip.hide);
-
-
 });

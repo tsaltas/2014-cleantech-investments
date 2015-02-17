@@ -55,47 +55,104 @@
     text-transform: Uppercase;
     text-align: center;
     color: #525252;
-    }
+  }
+
+
+  h1 {
+    font-family: 'Lato', futura, georgia;
+    line-height:5px;
+    text-transform: Uppercase;
+    color: #525252;
+    text-align: center !important;
+  }
 
   h3 {
     font-family: 'Lato', futura, georgia;
-    letter-spacing: 1px;
-    line-height: 10px;
+    line-height:5px;
     text-transform: Uppercase;
-    text-align: center;
     color: #525252;
-    }
+  }
 
   .dc-chart g.row text {
     font: "Helvetica Neue";
-    color: #525252;
     fill: #525252;
-    }
+  }
 
   body {
     min-height: 2000px;
     padding-top: 50px;
-    }
+  }
+
+  #dc-data-count {
+    font-family: 'Lato', futura, georgia;
+  }
+
+  .padded {
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 25px;
+    text-align: center;
+  }
+
+  .right {
+    float: right !important;
+  }
 
 </style>
 
 <body>
+  <!-- Record Counter Widget -->
   <div class="container" id="cleantech-container">
-    <div class="row">
-      <div id='dc-data-count'>
-        <span class='filter-count'></span>selected out of <span class='total-count'></span> records
-      </div>
+    <div id='dc-data-count' class='right'>
+      <span class='filter-count'></span> selected out of <span class='total-count'></span> records
     </div>
 
     <br>
+    <br>
 
-    <div class="row">
-        <h3>Investments over time</h3>
+    <!-- Page title -->
+    <h1 class='center'>2014 Cleantech Investments</h1>
+    
     <br>
     <br>
     
+    <!-- Row 1 -->
+    <h3>Data Filters</h3>
+    <br>
+
     <div class="row">
-      <div id="quarterly-volume">
+      <div id="corporates" class='padded'>
+        <span class="chart-title">Corporate participation</span>
+        <span class="reset" style="display: none;">range: <span class="filter"></span></span>
+        <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
+
+        <div class="clearfix"></div>
+      </div>
+  
+
+      <div id="quarter-volume" class='padded'>
+        <span class="chart-title">Deals by quarter</span>
+        <span class="reset" style="display: none;">range: <span class="filter"></span></span>
+        <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
+
+        <div class="clearfix"></div>
+      </div>
+      
+      <div id="stage" class='padded'>
+        <span class="chart-title">Deals by stage</span>
+        <span class="reset" style="display: none;">range: <span class="filter"></span></span>
+        <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
+
+        <div class="clearfix"></div>
+      </div>
+    </div>
+
+    <!-- Row 2 -->
+    <h3>Investments over time</h3>
+    <br>
+
+    <div class="row">
+      <div id="quarterly-volume" class='padded'>
         <span class="chart-title">Deals by quarter</span>
         <span class="reset" style="display: none;">range: <span class="filter"></span></span>
         <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
@@ -104,26 +161,7 @@
       </div>
 
       <div id="quarterly-dollars">
-        <span class="chart-title">Investment by quarter</span>
-        <span class="reset" style="display: none;">range: <span class="filter"></span></span>
-        <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
-
-        <div class="clearfix"></div>
-      </div>
-    </div>
-      
-    <div class="row">
-      <div id="corporates">
-        <span class="chart-title">Deals with corporate participation</span>
-        <span class="reset" style="display: none;">range: <span class="filter"></span></span>
-        <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
-
-        <div class="clearfix"></div>
-      </div>
-  
-
-      <div id="quarter-volume">
-        <span class="chart-title">Deals by quarter</span>
+        <span class="chart-title">Dollars by quarter</span>
         <span class="reset" style="display: none;">range: <span class="filter"></span></span>
         <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
 
@@ -131,10 +169,11 @@
       </div>
     </div>
 
+    <!-- Row 3 -->
+    <h3>Sector trends</h3>
     <br>
-
     <div class="row">
-      <div id="sector-dollars">
+      <div id="sector-dollars" class='padded'>
         <span class="chart-title">Investments by sector ($MM)</span>
         <span class="reset" style="display: none;">range: <span class="filter"></span></span>
         <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
@@ -142,8 +181,36 @@
         <div class="clearfix"></div>
       </div> 
 
-      <div id="sector-deals">
+      <div id="sector-deals" class='padded'>
         <span class="chart-title">Deals by sector</span>
+        <span class="reset" style="display: none;">range: <span class="filter"></span></span>
+        <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
+
+        <div class="clearfix"></div>
+      </div>
+    </div>
+
+    <!-- Row 4 -->
+    <h3>Deal size</h3>
+    <br>
+    <div class="row">
+      <div id="sector-bubble-chart" class='padded'>
+        <span class="chart-title">Deal size by sector</span>
+        <span class="reset" style="display: none;">range: <span class="filter"></span></span>
+        <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
+
+        <div class="clearfix"></div>
+      </div> 
+
+      <div id="XXX" class='padded'>
+        <span class="chart-title">Deal size by stage</span>
+        <span class="reset" style="display: none;">range: <span class="filter"></span></span>
+        <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
+
+      <div class="clearfix"></div>
+
+      <div id="XXX" class='padded'>
+        <span class="chart-title">Deal size by investor</span>
         <span class="reset" style="display: none;">range: <span class="filter"></span></span>
         <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
 

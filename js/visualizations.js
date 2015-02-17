@@ -26557,6 +26557,7 @@ $(document).ready(function() {
     ********************************************************/
 
     var quarterDollarChart = dc.pieChart('#quarter-dollars');
+    var quarterVolumeChart = dc.pieChart('#quarter-volume');
 
     var quarter = i3DataCrossfilter.dimension(function (d) {
         var month = d.date.getMonth();
@@ -26571,16 +26572,40 @@ $(document).ready(function() {
         }
     });
 
-    var quarterGroup = quarter.group().reduceSum(function (d) {
+    var quarterFilter = i3DataCrossfilter.dimension(function (d) {
+        var month = d.date.getMonth();
+        if (month <= 2) {
+            return 'Q1';
+        } else if (month > 2 && month <= 5) {
+            return 'Q2';
+        } else if (month > 5 && month <= 8) {
+            return 'Q3';
+        } else {
+            return 'Q4';
+        }
+    });
+
+    var quarterDollarGroup = quarter.group().reduceSum(function (d) {
         return d.amount;
     });
+
+    var quarterVolumeGroup = quarterFilter.group().reduceCount();
 
     quarterDollarChart.width(180)
         .height(180)
         .radius(80)
         .innerRadius(30)
         .dimension(quarter)
-        .group(quarterGroup)
+        .group(quarterDollarGroup)
+
+    quarterVolumeChart.width(180)
+        .height(180)
+        .radius(80)
+        .innerRadius(30)
+        .dimension(quarterFilter)
+        .group(quarterVolumeGroup)
+
+        
 
     // Total investment by year ($ and volume)
     // Total investment by quarter ($ and volume)

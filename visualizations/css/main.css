@@ -1,0 +1,132 @@
+/*
+* CSS Theme for i3 Cleantech Investments Data Visualizations
+* Author: Shannon Tsaltas
+* Date: March, 2015
+* Version: 1.0
+*/
+
+/* Green color scheme
+* #a6d96a
+* #66bd63
+* #D9EDF7
+* #ccece6
+* #e6f5d0
+* #b8e186
+* #7fbc41
+* #99d8c9
+* #41ae76
+* #238b45
+* #78c679
+* #41ab5d
+* #4eb953
+*/
+
+/* Main styles */
+body {
+  min-height: 2000px;
+  padding-top: 50px;
+}
+
+.padded {
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 25px;
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+  float: right !important;
+}
+
+.footer {
+  font-weight: bold;
+}
+
+/* unvisited link */
+a:link {
+    color: #238b45;
+}
+
+/* visited link */
+a:visited {
+    color: #238b45;
+}
+
+/* mouse over link */
+a:hover {
+    color: #41ab5d;
+}
+
+/* selected link */
+a:active {
+    color: #41ab5d;
+}
+
+/* Heading styles */
+h1 {
+  font-family: 'Lato', futura, georgia;
+  line-height:5px;
+  text-transform: Uppercase;
+  color: #525252;
+  text-align: center !important;
+}
+
+h3 {
+  font-family: 'Lato', futura, georgia;
+  line-height:5px;
+  text-transform: Uppercase;
+  color: #525252;
+}
+
+/* Chart styles */
+.chart-title {
+  font-family: 'Lato', futura, georgia;
+  letter-spacing: 1px;
+  line-height: 15px;
+  text-transform: Uppercase;
+  text-align: center;
+  color: #525252;
+}
+
+.dc-chart g.row text {
+  font: "Helvetica Neue";
+  fill: #525252;
+}
+
+/* Data count widget */
+#dc-data-count {
+  font-family: 'Lato', futura, georgia;
+}
+
+/* Tooltip styles */
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 8px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}

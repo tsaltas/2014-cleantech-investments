@@ -26592,28 +26592,27 @@ $(document).ready(function() {
         .offset([-10, 0])
         .html(function (d) { return "<span style='color: #99d8c9'>" + d.key + "</span> : $" + numberFormat(d.value.avgSize) + "MM";});
 
-    // set colors to shades of green
+    // set color scheme to shades of green
     var colorScheme = [
       "#53CC5A"
-      ,"#edf9ee"
-      , "#dcf4de"
-      , "#cbefcd"
-      , "#baeabd"
-      , "#a9e5ac"
       , "#97e09c"
-      , "#86db8b"
-      , "#75d67a"
-      , "#64d16a"
-
       , "#4ab751"
       , "#42a348"
+      , "#183d1b"
+      , "#75d67a"
+      , "#dcf4de"
+      , "#a9e5ac"
+      , "#86db8b"
       , "#3a8e3e"
       , "#317a36"
-      , "#29662d"
-      , "#215124"
-      , "#183d1b"
+      , "#edf9ee"
       , "#102812"
-      , "#081409"
+      , "#edf9ee"
+      , "#29662d"
+      , "#baeabd"
+      , "#215124"
+      , "#64d16a"
+      , "#cbefcd"
     ];
 
     /********************************************************
@@ -26902,7 +26901,7 @@ $(document).ready(function() {
         .group(sectorBubbleGroup)
         .colors(colorScheme)
         .colorAccessor(function (d) {
-            return d.value.dealDollars;
+               return 0;
         })
         .keyAccessor(function (p) {
             return p.value.dealCount;
@@ -26983,7 +26982,7 @@ $(document).ready(function() {
         .group(stageBubbleGroup)
         .colors(colorScheme)
         .colorAccessor(function (d) {
-            return d.value.dealDollars;
+            return 0;
         })
         .keyAccessor(function (p) {
             return p.value.dealCount;

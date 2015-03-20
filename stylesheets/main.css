@@ -102,7 +102,7 @@ h3 {
   fill: #525252;
 }
 
-.dc-chart .node text{
+#stage-bubble-chart .node text{
   opacity: 1;
 }
 

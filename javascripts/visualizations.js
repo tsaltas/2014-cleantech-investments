@@ -14,9 +14,9 @@ $(document).ready(function() {
     "use strict";
 
     /********************************************************
-    *														*
-    * 	Load and clean up data          					*
-    *														*
+    *
+    * 	Load and clean up data
+    *
     ********************************************************/
     // load data
     // hard-coded for now, can't load local files in browser
@@ -26593,12 +26593,33 @@ $(document).ready(function() {
         .html(function (d) { return "<span style='color: #99d8c9'>" + d.key + "</span> : $" + numberFormat(d.value.avgSize) + "MM";});
 
     // set colors to shades of green
-    var colorScheme = ["#a6d96a","#66bd63","#D9EDF7","#ccece6", "#e6f5d0","#b8e186","#7fbc41","#99d8c9","#41ae76","#238b45","#78c679","#41ab5d", "#4eb953"].reverse();
+    var colorScheme = [
+      "#53CC5A"
+      ,"#edf9ee"
+      , "#dcf4de"
+      , "#cbefcd"
+      , "#baeabd"
+      , "#a9e5ac"
+      , "#97e09c"
+      , "#86db8b"
+      , "#75d67a"
+      , "#64d16a"
+
+      , "#4ab751"
+      , "#42a348"
+      , "#3a8e3e"
+      , "#317a36"
+      , "#29662d"
+      , "#215124"
+      , "#183d1b"
+      , "#102812"
+      , "#081409"
+    ];
 
     /********************************************************
-    *														*
-    * 	Bar charts: Deals by quarter                        *
-    *														*
+    *
+    * 	Bar charts: Deals by quarter
+    *
     ********************************************************/
     
     var quarterlyVolumeChart = dc.barChart('#quarterly-volume');
@@ -26670,9 +26691,9 @@ $(document).ready(function() {
         });
 
     /********************************************************
-    *														*
-    * 	Pie chart: Deals by quarter                         *
-    *														*
+    *
+    * 	Pie chart: Deals by quarter
+    *
     ********************************************************/
 
     var quarterVolumeChart = dc.pieChart('#quarter-volume');
@@ -26690,9 +26711,9 @@ $(document).ready(function() {
         .renderTitle(false)
 
     /********************************************************
-    *														*
-    * 	Pie chart: Deals by corporate participation         *
-    *														*
+    *	
+    * 	Pie chart: Deals by corporate participation
+    *
     ********************************************************/
 
     var corpChart = dc.pieChart('#corporates');
@@ -26716,9 +26737,9 @@ $(document).ready(function() {
         .renderTitle(false)
 
     /********************************************************
-    *														*
-    * 	Pie chart: Deals by stage                           *
-    *														*
+    *	
+    * 	Pie chart: Deals by stage
+    *
     ********************************************************/
 
     var stageChart = dc.pieChart('#stage');
@@ -26778,9 +26799,9 @@ $(document).ready(function() {
         .renderTitle(false)
 
     /********************************************************
-    *														*
-    * 	Pie chart: Dollars and Deals by sector              *
-    *														*
+    *	
+    * 	Pie chart: Dollars and Deals by sector
+    *	
     ********************************************************/
 
     var sectorDealChart = dc.pieChart('#sector-deals');
@@ -26806,9 +26827,9 @@ $(document).ready(function() {
         .colors(colorScheme);
 
     /********************************************************
-    *														*
-    * 	Row chart: Investment ($) by sector                 *
-    *														*
+    *	
+    * 	Row chart: Investment ($) by sector
+    *
     ********************************************************/
     
     var sectorDollarChart = dc.rowChart("#sector-dollars");
@@ -26840,29 +26861,29 @@ $(document).ready(function() {
     sectorDollarChart.labelOffsetY(11.5);
 
     /********************************************************
-    *														*
-    * 	Bubble chart: Sector deal size                      *
-    *														*
+    *	
+    * 	Bubble chart: Sector deal size
+    *	
     ********************************************************/
 
     var sectorBubbleChart = dc.bubbleChart('#sector-bubble-chart');
 
     var sectorBubbleGroup = sectorDimension.group().reduce(
-        /* callback for when data is added to the current filter results */
+        // callback for when data is added to the current filter results
         function (p, v) {
             ++p.dealCount;
             p.dealDollars += v.amount / 1000000;
             p.avgSize = p.dealDollars / p.dealCount;
             return p;
         },
-        /* callback for when data is removed from the current filter results */
+        // callback for when data is removed from the current filter results
         function (p, v) {
             --p.dealCount;
             p.dealDollars -= v.amount / 1000000;
             p.avgSize = p.dealDollars / p.dealCount;
             return p;
         },
-        /* initialize p */
+        // initialize p
         function () {
             return {
                 dealCount: 0,
@@ -26921,9 +26942,9 @@ $(document).ready(function() {
             .r(d3.scale.linear().domain(rRange));
 
     /********************************************************
-    *														*
-    * 	Bubble chart: Stage deal size                       *
-    *														*
+    *	
+    * 	Bubble chart: Stage deal size
+    *	
     ********************************************************/
 
     var stageBubbleChart = dc.bubbleChart('#stage-bubble-chart');
@@ -27003,9 +27024,9 @@ $(document).ready(function() {
 
 
     /********************************************************
-    *														*
-    * 	Metrics and widgets for entire page                 *
-    *														*
+    *	
+    * 	Metrics and widgets for entire page
+    *	
     ********************************************************/
     // create a data count widget and use css selector as anchor
     dc.dataCount('#dc-data-count')

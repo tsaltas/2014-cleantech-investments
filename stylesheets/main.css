@@ -102,6 +102,10 @@ h3 {
   fill: #525252;
 }
 
+.dc-chart .node text{
+  opacity: 1;
+}
+
 /* Data count widget */
 #dc-data-count {
   font-family: 'Lato', futura, georgia;

@@ -954,6 +954,8 @@ dc.baseChart = function (_chart) {
     _chart.turnOnControls = function () {
         if (_root) {
             _chart.selectAll(".reset").style("display", null);
+            // added by Shannon
+            _chart.selectAll(".reset-hidden").style("visibility", null);
             _chart.selectAll(".filter").text(_filterPrinter(_chart.filters())).style("display", null);
         }
         return _chart;
@@ -962,6 +964,8 @@ dc.baseChart = function (_chart) {
     _chart.turnOffControls = function () {
         if (_root) {
             _chart.selectAll(".reset").style("display", "none");
+            // added by Shannon
+            _chart.selectAll(".reset-hidden").style("visibility", "hidden");
             _chart.selectAll(".filter").style("display", "none").text(_chart.filter());
         }
         return _chart;

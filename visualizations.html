@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
 <head>
 	<meta charset="utf-8"/>
 	<title>2014 Corporates & Venture Capital Activity</title>
@@ -16,123 +17,121 @@
     <div id='dc-data-count' class='right'>
       <span class='filter-count'></span> selected out of <span class='total-count'></span> records
     </div>
-  -->
+    <br>
+    <br>-->
 
-  <br>
-  <br>
+    <!-- Page title -->
+    <h1 class='no-pad no-margin center'>2014 Corporates & Venture Capital Activity</h1>
 
-  <!-- Page title -->
-  <h1 class='no-pad no-margin center'>2014 Corporates & Venture Capital Activity</h1>
+    <br>
+    <br>
 
-  <br>
-  <br>
+    <!-- Row 1 -->
+    <h3 class='no-pad no-margin'>Data Filters</h3>
+    <br>
 
-  <!-- Row 1 -->
-  <h3 class='no-pad no-margin'>Data Filters</h3>
-  <br>
-
-  <div class="row">
-  	<div id="corporates" class='extra-pad center'>
-  		<span class="chart-title">Corporate participation</span>
-      <br>
-  		<span class="reset" style="display: none;">Filtered for: <span class="filter"></span></span>
-  		<a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
-  		<div class="clearfix"></div>
-  	</div>
+    <div class="row">
+      <div id="corporates" class='extra-pad center'>
+        <span class="chart-title">Corporate participation</span>
+        <br>
+        <span class='reset-hidden' style="visibility: hidden;">Filtered for: <span class="filter"></span></span>
+        <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
+        <div class="clearfix"></div>
+      </div>
 
 
-  	<div id="quarter-volume" class='extra-pad center'>
-  		<span class="chart-title">Deals by quarter</span>
-      <br>
-  		<span class="reset" style="display: none;">Filtered for: <span class="filter"></span></span>
-  		<a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
-  		<div class="clearfix"></div>
-  	</div>
+      <div id="quarter-volume" class='extra-pad center'>
+        <span class="chart-title">Deals by quarter</span>
+        <br>
+        <span class='reset-hidden' style="visibility: hidden;">Filtered for: <span class="filter"></span></span>
+        <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
+        <div class="clearfix"></div>
+      </div>
 
-  	<div id="stage" class='extra-pad center'>
-  		<span class="chart-title">Deals by stage</span>
-      <br>
-  		<span class="reset" style="display: none;">Filtered for: <span class="filter"></span> Stage</span>
-  		<a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
-  		<div class="clearfix"></div>
-  	</div>
+      <div id="stage" class='extra-pad center'>
+        <span class="chart-title">Deals by stage</span>
+        <br>
+        <span class='reset-hidden' style="visibility: hidden;">Filtered for: <span class="filter"></span></span>
+        <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+
+    <!-- Row 2 -->
+    <h3 class='no-pad no-margin'>Investments over time</h3>
+    <br>
+
+    <div class="row">
+      <div id="quarterly-volume" class='extra-pad center'>
+        <span class="chart-title">Deals by quarter</span>
+        <br>
+        <span class='reset-hidden' style="visibility: hidden;">Filtered for: <span class="filter"></span></span>
+        <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
+        <div class="clearfix"></div>
+      </div>
+
+      <div id="quarterly-dollars" class='extra-pad center'>
+        <span class="chart-title">Dollars by quarter</span>
+        <br>
+        <span class='reset-hidden' style="visibility: hidden;">Filtered for: <span class="filter"></span></span>
+        <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+
+    <!-- Row 3 -->
+    <h3 class='no-pad no-margin'>Sector trends</h3>
+    <br>
+    <div class="row">
+      <div id="sector-dollars" class='extra-pad center'>
+        <span class="chart-title">Investments by sector ($MM)</span>
+        <br>
+        <span class='reset-hidden' style="visibility: hidden;">Filtered for: <span class="filter"></span></span>
+        <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
+        <div class="clearfix"></div>
+      </div> 
+
+      <div id="sector-deals" class='extra-pad center'>
+        <span class="chart-title">Deals by sector</span>
+        <br>
+        <span class='reset-hidden' style="visibility: hidden;">Filtered for: <span class="filter"></span></span>
+        <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+
+    <!-- Row 4 -->
+    <h3 class='no-pad no-margin'>Deal size</h3>
+    <br>
+    <div class="row">
+      <div id="sector-bubble-chart" class='extra-pad center'>
+        <span class="chart-title">By sector (radius & mouseover represent average deal size)</span>
+        <br>
+        <span class='reset-hidden' style="visibility: hidden;">Filtered for: <span class="filter"></span></span>
+        <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
+        <div class="clearfix"></div>
+      </div> 
+
+      <div id="stage-bubble-chart" class='extra-pad center'>
+        <span class="chart-title">By stage (radius & mouseover represent average deal size)</span>
+        <br>
+        <span class='reset-hidden' style="visibility: hidden;">Filtered for: <span class="filter"></span></span>
+        <a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+
+    <div class="footer extra-pad">Want to get access to all the deals behind these charts? <a href="http://info.cleantech.com/RequestDemo.html" target="_blank">Get a demo</a></div>
+
+    <!-- Load vendor libraries -->
+    <script type="text/javascript" src="javascripts/jquery-2.1.3.js"></script>
+    <script type="text/javascript" src="javascripts/d3.js"></script>
+    <script type="text/javascript" src="javascripts/d3.tip.js"></script>
+    <script type="text/javascript" src="javascripts/crossfilter.js"></script>
+    <script type="text/javascript" src="javascripts/dc.js"></script>
+    <script type="text/javascript" src="javascripts/bootstrap.min.js"></script>
+    <!-- Load visualizations -->
+    <script type="text/javascript" src="javascripts/visualizations.js"></script>
   </div>
-
-  <!-- Row 2 -->
-  <h3 class='no-pad no-margin'>Investments over time</h3>
-  <br>
-
-  <div class="row">
-  	<div id="quarterly-volume" class='extra-pad center'>
-  		<span class="chart-title">Deals by quarter</span>
-      <br>
-  		<span class="reset" style="display: none;">Filtered for: <span class="filter"></span></span>
-  		<a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
-  		<div class="clearfix"></div>
-  	</div>
-
-  	<div id="quarterly-dollars" class='extra-pad center'>
-  		<span class="chart-title">Dollars by quarter</span>
-      <br>
-  		<span class="reset" style="display: none;">Filtered for: <span class="filter"></span></span>
-  		<a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
-  		<div class="clearfix"></div>
-  	</div>
-  </div>
-
-  <!-- Row 3 -->
-  <h3 class='no-pad no-margin'>Sector trends</h3>
-  <br>
-  <div class="row">
-  	<div id="sector-dollars" class='extra-pad center'>
-  		<span class="chart-title">Investments by sector ($MM)</span>
-      <br>
-  		<span class="reset" style="display: none;">Filtered for: <span class="filter"></span></span>
-  		<a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
-  		<div class="clearfix"></div>
-  	</div> 
-
-  	<div id="sector-deals" class='extra-pad center'>
-      <span class="chart-title">Deals by sector</span>
-      <br>
-  		<span class="reset" style="display: none;">Filtered for: <span class="filter"></span></span>
-  		<a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
-  		<div class="clearfix"></div>
-  	</div>
-  </div>
-
-  <!-- Row 4 -->
-  <h3 class='no-pad no-margin'>Deal size</h3>
-  <br>
-  <div class="row">
-  	<div id="sector-bubble-chart" class='extra-pad center'>
-  		<span class="chart-title">By sector (radius & mouseover represent average deal size)</span>
-      <br>
-  		<span class="reset" style="display: none;">Filtered for: <span class="filter"></span></span>
-  		<a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
-
-  		<div class="clearfix"></div>
-  	</div> 
-
-  	<div id="stage-bubble-chart" class='extra-pad center'>
-  		<span class="chart-title">By stage (radius & mouseover represent average deal size)</span>
-      <br>
-  		<span class="reset" style="display: none;">Filtered for: <span class="filter"></span></span>
-  		<a class='reset' href='javascript:dc.filterAll();dc.redrawAll();' style='display: none;'>reset</a>
-
-  		<div class="clearfix"></div>
-  	</div>
-
-  	<div class="footer extra-pad">Want to get access to all the deals behind these charts? <a href="http://info.cleantech.com/RequestDemo.html" target="_blank">Get a demo</a></div>
-
-  	<!-- Load vendor libraries -->
-  	<script type="text/javascript" src="javascripts/jquery-2.1.3.js"></script>
-  	<script type="text/javascript" src="javascripts/d3.js"></script>
-  	<script type="text/javascript" src="javascripts/d3.tip.js"></script>
-  	<script type="text/javascript" src="javascripts/crossfilter.js"></script>
-  	<script type="text/javascript" src="javascripts/dc.js"></script>
-  	<script type="text/javascript" src="javascripts/bootstrap.min.js"></script>
-  	<!-- Load visualizations -->
-  	<script type="text/javascript" src="javascripts/visualizations.js"></script>
-
-  </body>
+</body>
+</html>

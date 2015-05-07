@@ -25,6 +25,19 @@
 body {
   min-height: 2000px;
   padding-top: 50px;
+  background-color: #f3f3f3;
+}
+
+.charts {
+  background-color: #022a3a;
+  padding: 50px;
+  padding-bottom: 0px;
+}
+
+.get-demo {
+  font-weight: bold;
+  background-color: #f3f3f3;
+  padding: 25px 0px;
 }
 
 .extra-pad {
@@ -49,28 +62,9 @@ body {
   float: right !important;
 }
 
-.footer {
-  font-weight: bold;
-}
-
-/* unvisited link */
-a:link {
-    color: #238b45;
-}
-
-/* visited link */
-a:visited {
-    color: #238b45;
-}
-
-/* mouse over link */
-a:hover {
-    color: #41ab5d;
-}
-
-/* selected link */
-a:active {
-    color: #41ab5d;
+/* hyperlink styles */
+a:link, a:visited, a:hover, a:active {
+    color: #ff671b;
 }
 
 /* Heading styles */

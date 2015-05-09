@@ -24,20 +24,36 @@
 /* Main styles */
 body {
   min-height: 2000px;
-  padding-top: 50px;
+  padding-top: 35px;
   background-color: #f3f3f3;
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+}
+
+.container {
+  background-color: #022a3a;
+}
+
+.title {
+  padding: 0px;
+  padding-top: 35px;
+  margin: 0px;
+  font-size: 28pt;
+  line-height: 120%;
+  font-weight: 700;
+  text-align: center;
 }
 
 .charts {
-  background-color: #022a3a;
-  padding: 50px;
-  padding-bottom: 0px;
+  padding: 100px;
+  padding-top: 35px;
 }
 
 .get-demo {
-  font-weight: bold;
   background-color: #f3f3f3;
   padding: 25px 0px;
+  color: #022a3a;
+  font-weight: bold;
 }
 
 .extra-pad {
@@ -68,27 +84,22 @@ a:link, a:visited, a:hover, a:active {
 }
 
 /* Heading styles */
-h1 {
-  font-family: 'Lato', futura, georgia;
-  text-transform: Uppercase;
-  color: #525252;
-  text-align: center !important;
-}
 
-h3 {
-  font-family: 'Lato', futura, georgia;
-  text-transform: Uppercase;
-  color: #525252;
+.section-title {
+  padding: 0px;
+  margin: 0px;
+  font-size: 14pt;
+  line-height: 120%;
+  font-weight: 600;
+  color: #ff671b;
 }
 
 /* Chart styles */
 .chart-title {
-  font-family: 'Lato', futura, georgia;
   letter-spacing: 1px;
   line-height: 15px;
   text-transform: Uppercase;
   text-align: center;
-  color: #525252;
 }
 
 .dc-chart g.row text {
@@ -98,11 +109,6 @@ h3 {
 
 #stage-bubble-chart .node text{
   opacity: 1;
-}
-
-/* Data count widget */
-#dc-data-count {
-  font-family: 'Lato', futura, georgia;
 }
 
 /* Tooltip styles */

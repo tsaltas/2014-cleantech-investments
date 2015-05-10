@@ -84,7 +84,6 @@ a:link, a:visited, a:hover, a:active {
 }
 
 /* Heading styles */
-
 .section-title {
   padding: 0px;
   margin: 0px;
@@ -96,10 +95,13 @@ a:link, a:visited, a:hover, a:active {
 
 /* Chart styles */
 .chart-title {
-  letter-spacing: 1px;
-  line-height: 15px;
-  text-transform: Uppercase;
+  font-size: 10pt;
+  line-height: 120%;
+  font-weight: 600;
   text-align: center;
+  margin: 10px;
+  padding-bottom: 5px;
+  border-bottom: thin solid;
 }
 
 .dc-chart g.row text {

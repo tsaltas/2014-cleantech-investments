@@ -26572,25 +26572,25 @@ $(document).ready(function() {
     var rowTip = d3.tip()
         .attr('class', 'd3-tip')
         .offset([-10, 0])
-        .html(function (d) { return "<span style='color: #99d8c9'>" +  d.key + "</span> : "  + numberFormat(d.value); });
+        .html(function (d) { return "<span style='color: #ff671b'>" +  d.key + "</span>: "  + numberFormat(d.value); });
 
     // tooltips for pie chart
     var pieTip = d3.tip()
         .attr('class', 'd3-tip')
         .offset([-10, 0])
-        .html(function (d) { return "<span style='color: #99d8c9'>" +  d.data.key + "</span> : "  + numberFormat(d.value); });
+        .html(function (d) { return "<span style='color: #ff671b'>" +  d.data.key + "</span>: "  + numberFormat(d.value); });
 
     // tooltips for bar chart - number
     var barTip = d3.tip()
         .attr('class', 'd3-tip')
         .offset([-10, 0])
-        .html(function (d) { return "<span style='color: #99d8c9'>" + d.data.key + "</span> : " + numberFormat(d.y);});
+        .html(function (d) { return "<span style='color: #ff671b'>" + d.data.key + "</span>: " + numberFormat(d.y);});
 
     // tooltips for bubble chart
     var bubbleTip = d3.tip()
         .attr('class', 'd3-tip')
         .offset([-10, 0])
-        .html(function (d) { return "<span style='color: #99d8c9'>" + d.key + "</span> : $" + numberFormat(d.value.avgSize) + "MM";});
+        .html(function (d) { return "<span style='color: #ff671b'>" + d.key + "</span>: $" + numberFormat(d.value.avgSize) + "MM";});
 
     // set color scheme to shades of green
     var colorScheme = [

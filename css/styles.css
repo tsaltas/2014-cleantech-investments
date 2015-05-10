@@ -85,7 +85,7 @@ a:link, a:visited, a:hover, a:active {
 
 /* Heading styles */
 .section-title {
-  padding: 0px;
+  padding: 15px;
   margin: 0px;
   font-size: 14pt;
   line-height: 120%;

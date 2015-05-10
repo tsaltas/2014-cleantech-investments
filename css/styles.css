@@ -99,14 +99,16 @@ a:link, a:visited, a:hover, a:active {
   line-height: 120%;
   font-weight: 600;
   text-align: center;
-  margin: 10px;
+  margin-bottom: 10px;
   padding-bottom: 5px;
   border-bottom: thin solid;
 }
 
 .dc-chart g.row text {
-  font: "Helvetica Neue";
-  fill: #525252;
+  fill: #fff;
+  font-size: 8pt;
+  line-height: 120%;
+  font-weight: 300;
 }
 
 #stage-bubble-chart .node text{

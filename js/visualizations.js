@@ -1,8 +1,8 @@
 /*
 * Javascript for i3 Cleantech Investments Data Visualizations
 * Author: Shannon Tsaltas
-* Date: March, 2015
-* Version: 1.0
+* Date: May, 2015
+* Version: 2.0
 * Build using:
 *     d3.js (http://d3js.org/)
 *     DC.js (http://dc-js.github.io/dc.js/)
@@ -20,7 +20,7 @@ $(document).ready(function() {
     ********************************************************/
     // load data
     // hard-coded for now, can't load local files in browser
-    var i3Data = 
+    var i3Data =
     [
         {
             "Company": "2DHeat",
@@ -26522,7 +26522,7 @@ $(document).ready(function() {
                     var newKey = key.toLowerCase();
                     newKey = newKey.replace(" ", '');
                     newKey = newKey.replace("?", '');
-                
+
                     data[i][newKey] = data[i][key];
                     delete data[i][key];
                 }
@@ -26567,7 +26567,7 @@ $(document).ready(function() {
     // tooltips
     var g;
     var numberFormat = d3.format(",f");
-    
+
     // tooltips for row chart
     var rowTip = d3.tip()
         .attr('class', 'd3-tip')
@@ -26585,7 +26585,7 @@ $(document).ready(function() {
         .attr('class', 'd3-tip')
         .offset([-10, 0])
         .html(function (d) { return "<span style='color: #99d8c9'>" + d.data.key + "</span> : " + numberFormat(d.y);});
-    
+
     // tooltips for bubble chart
     var bubbleTip = d3.tip()
         .attr('class', 'd3-tip')
@@ -26620,7 +26620,7 @@ $(document).ready(function() {
     * 	Bar charts: Deals by quarter
     *
     ********************************************************/
-    
+
     var quarterlyVolumeChart = dc.barChart('#quarterly-volume');
     var quarterlyDollarChart = dc.barChart('#quarterly-dollars');
 
@@ -26703,14 +26703,14 @@ $(document).ready(function() {
         .innerRadius(30)
         .dimension(quarterFilterDimension)
         .group(quarterVolumeGroup)
-        .colors(colorScheme)
+        .colors(["#fff", "#959595", "#363636", "#ff671b"])
         .label(function (d) {
             return d.data.key + ": " + d.data.value;
         })
         .renderTitle(false)
 
     /********************************************************
-    *	
+    *
     * 	Pie chart: Deals by corporate participation
     *
     ********************************************************/
@@ -26729,14 +26729,14 @@ $(document).ready(function() {
         .innerRadius(30)
         .dimension(corpDimension)
         .group(corpVolumeGroup)
-        .colors(colorScheme)
+        .colors(["#fff", "#ff671b"])
         .label(function (d) {
             return d.data.key + ": " + d.data.value;
         })
         .renderTitle(false)
 
     /********************************************************
-    *	
+    *
     * 	Pie chart: Deals by stage
     *
     ********************************************************/
@@ -26791,16 +26791,16 @@ $(document).ready(function() {
         .innerRadius(30)
         .dimension(stageFilterDimension)
         .group(stageVolumeGroup)
-        .colors(colorScheme)
+        .colors(["#fff", "#959595", "#363636", "#ff671b"])
         .label(function (d) {
             return d.data.key + ": " + d.data.value;
         })
         .renderTitle(false)
 
     /********************************************************
-    *	
+    *
     * 	Pie chart: Dollars and Deals by sector
-    *	
+    *
     ********************************************************/
 
     var sectorDealChart = dc.pieChart('#sector-deals');
@@ -26826,11 +26826,11 @@ $(document).ready(function() {
         .colors(colorScheme);
 
     /********************************************************
-    *	
+    *
     * 	Row chart: Investment ($) by sector
     *
     ********************************************************/
-    
+
     var sectorDollarChart = dc.rowChart("#sector-dollars");
 
     var sectorDollarDimension = i3DataCrossfilter.dimension(function (d) {
@@ -26860,9 +26860,9 @@ $(document).ready(function() {
     sectorDollarChart.labelOffsetY(11.5);
 
     /********************************************************
-    *	
+    *
     * 	Bubble chart: Sector deal size
-    *	
+    *
     ********************************************************/
 
     var sectorBubbleChart = dc.bubbleChart('#sector-bubble-chart');
@@ -26914,7 +26914,7 @@ $(document).ready(function() {
         })
         .maxBubbleRelativeSize(0.07)
         .elasticY(true)
-        .elasticX(true)        
+        .elasticX(true)
         .renderHorizontalGridLines(true)
         .renderVerticalGridLines(true)
         .xAxisLabel('Number of deals')
@@ -26941,9 +26941,9 @@ $(document).ready(function() {
             .r(d3.scale.linear().domain(rRange));
 
     /********************************************************
-    *	
+    *
     * 	Bubble chart: Stage deal size
-    *	
+    *
     ********************************************************/
 
     var stageBubbleChart = dc.bubbleChart('#stage-bubble-chart');
@@ -26995,7 +26995,7 @@ $(document).ready(function() {
         })
         .maxBubbleRelativeSize(0.07)
         .elasticY(true)
-        .elasticX(true)        
+        .elasticX(true)
         .renderHorizontalGridLines(true)
         .renderVerticalGridLines(true)
         .xAxisLabel('Number of deals')
@@ -27023,9 +27023,9 @@ $(document).ready(function() {
 
 
     /********************************************************
-    *	
+    *
     * 	Metrics and widgets for entire page
-    *	
+    *
     ********************************************************/
     // create a data count widget and use css selector as anchor
     dc.dataCount('#dc-data-count')
@@ -27039,7 +27039,7 @@ $(document).ready(function() {
     // rotate bar chart labels
     d3.selectAll("g.x text")
         .attr("class", "sectorLabel")
-        .style("text-anchor", "end") 
+        .style("text-anchor", "end")
         .attr("transform", "translate(-10,0)rotate(315)");
     */
 
@@ -27047,7 +27047,7 @@ $(document).ready(function() {
     d3.selectAll(".bar")
         .on('mouseover', barTip.show)
         .on('mouseout', barTip.hide);
-    
+
 
     d3.selectAll("g.row").call(rowTip);
     d3.selectAll("g.row")
@@ -27058,7 +27058,7 @@ $(document).ready(function() {
     d3.selectAll("g.pie-slice")
         .on('mouseover', pieTip.show)
         .on('mouseout', pieTip.hide);
-    
+
     d3.selectAll(".bubble").call(bubbleTip);
     d3.selectAll(".bubble")
         .on('mouseover', bubbleTip.show)

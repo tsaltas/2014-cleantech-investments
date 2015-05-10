@@ -26665,7 +26665,7 @@ $(document).ready(function() {
         .x(d3.scale.ordinal()
             .domain(["Q1", "Q2", "Q3", "Q4"])
         )
-        .colors(colorScheme)
+        .colors(["#ff671b"])
         .xUnits(dc.units.ordinal)
         .yAxisLabel('2014 Deals')
         .title(function(d) {
@@ -26682,7 +26682,7 @@ $(document).ready(function() {
         .x(d3.scale.ordinal()
             .domain(["Q1", "Q2", "Q3", "Q4"])
         )
-        .colors(colorScheme)
+        .colors(["#ff671b"])
         .xUnits(dc.units.ordinal)
         .yAxisLabel('$MM')
         .title(function(d) {
@@ -26849,13 +26849,12 @@ $(document).ready(function() {
         .dimension(sectorFilterDimension)
         .group(sectorDollarGroup)
         .renderLabel(true)
-        .colors(colorScheme)
+        .colors(["#ff671b"])
         .gap(9)
         .elasticX(true)
         .renderTitle(false)
         .ordering(function(d){ return -d.value })
         .xAxis().ticks(5).tickFormat(d3.format("d"));
-
 
     sectorDollarChart.labelOffsetY(11.5);
 
@@ -26899,10 +26898,7 @@ $(document).ready(function() {
         .margins({top: 10, right: 50, bottom: 40, left: 50})
         .dimension(sectorFilterDimension)
         .group(sectorBubbleGroup)
-        .colors(colorScheme)
-        .colorAccessor(function (d) {
-               return 0;
-        })
+        .colors(["#ff671b"])
         .keyAccessor(function (p) {
             return p.value.dealCount;
         })
@@ -26980,10 +26976,7 @@ $(document).ready(function() {
         .margins({top: 10, right: 50, bottom: 40, left: 50})
         .dimension(stageFilterDimension)
         .group(stageBubbleGroup)
-        .colors(colorScheme)
-        .colorAccessor(function (d) {
-            return 0;
-        })
+        .colors(["#ff671b"])
         .keyAccessor(function (p) {
             return p.value.dealCount;
         })

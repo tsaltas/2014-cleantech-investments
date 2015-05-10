@@ -94,6 +94,8 @@ a:link, a:visited, a:hover, a:active {
 }
 
 /* Chart styles */
+
+/* Chart titles */
 .chart-title {
   font-size: 10pt;
   line-height: 120%;
@@ -104,13 +106,60 @@ a:link, a:visited, a:hover, a:active {
   border-bottom: thin solid;
 }
 
-.dc-chart g.row text {
+/* Chart text */
+.dc-chart text {
   fill: #fff;
   font-size: 8pt;
   line-height: 120%;
   font-weight: 300;
 }
 
+.dc-chart .axis line {
+  fill: #fff;
+  stroke: #fff;
+}
+
+.dc-chart .axis path {
+  stroke: none;
+}
+
+/* Maxe axis labels line up with end of axes */
+#quarterly-volume .y-axis-label {
+  text-anchor: end;
+  line-height: 1;
+  transform: translate(12px, 100px) rotate(270deg);
+}
+
+#quarterly-dollars .y-axis-label {
+  text-anchor: end;
+  line-height: 1;
+  transform: translate(12px, 130px) rotate(270deg);
+}
+
+#sector-bubble-chart .y-axis-label {
+  text-anchor: end;
+  line-height: 1;
+  transform: translate(12px, 137px) rotate(270deg);
+}
+
+#stage-bubble-chart .y-axis-label {
+  text-anchor: end;
+  line-height: 1;
+  transform: translate(12px, 140px) rotate(270deg);
+}
+
+/* Bubble, bar, row chart opacity = 80% */
+.dc-chart .bubble {
+    fill-opacity: 0.8;
+}
+.dc-chart .bar {
+    fill-opacity: 0.8;
+}
+.dc-chart g.row rect {
+    fill-opacity: 0.8;
+}
+
+/* Fix to make sure "seed" label shows up */
 #stage-bubble-chart .node text{
   opacity: 1;
 }

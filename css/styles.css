@@ -111,7 +111,7 @@ a:link, a:visited, a:hover, a:active {
   fill: #fff;
   font-size: 8pt;
   line-height: 120%;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .dc-chart .axis line {
@@ -162,6 +162,19 @@ a:link, a:visited, a:hover, a:active {
 /* Fix to make sure "seed" label shows up */
 #stage-bubble-chart .node text{
   opacity: 1;
+}
+
+/* Dark blue text labels for white "slices" on pie charts
+Other text labels will default to white */
+
+#corporates ._0 {
+  fill: #022a3a;
+}
+#quarter-volume ._0 {
+  fill: #022a3a;
+}
+#stage ._0 {
+  fill: #022a3a;
 }
 
 /* Tooltip styles */

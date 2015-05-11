@@ -26655,9 +26655,8 @@ $(document).ready(function() {
         return d.amount / 1000000;
     });
 
-    quarterlyVolumeChart.width(420)
+    quarterlyVolumeChart.width(250)
         .height(180)
-        .margins({top: 10, right: 50, bottom: 30, left: 50})
         .dimension(quarterFilterDimension)
         .group(quarterVolumeGroup)
         .elasticY(true)
@@ -26672,9 +26671,8 @@ $(document).ready(function() {
             return "";
         });
 
-    quarterlyDollarChart.width(420)
+    quarterlyDollarChart.width(250)
         .height(180)
-        .margins({top: 10, right: 50, bottom: 30, left: 50})
         .dimension(quarterFilterDimension)
         .group(quarterDollarGroup)
         .elasticY(true)
@@ -26892,7 +26890,7 @@ $(document).ready(function() {
     );
 
     sectorBubbleChart
-        .width(990)
+        .width(710)
         .height(300)
         .transitionDuration(1500)
         .margins({top: 10, right: 50, bottom: 40, left: 50})
@@ -26970,7 +26968,7 @@ $(document).ready(function() {
     );
 
     stageBubbleChart
-        .width(990)
+        .width(710)
         .height(300)
         .transitionDuration(1500)
         .margins({top: 10, right: 50, bottom: 40, left: 50})

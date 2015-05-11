@@ -70,10 +70,27 @@ body {
   margin: 0px;
 }
 
+/* Centering & alignment */
 .center {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pie-charts {
+  width: 690px;
+}
+.bar-charts {
+  width: 600px;
+}
+.row-chart {
+  width: 350px;
+}
+.pie-chart {
+  width: 230px;
+}
+.bubble-chart {
+  width: 760px;
 }
 
 .right {
@@ -82,7 +99,7 @@ body {
 
 /* hyperlink styles */
 a:link, a:visited, a:hover, a:active {
-    color: #ff671b;
+  color: #ff671b;
 }
 
 /* Heading styles */
@@ -152,13 +169,13 @@ a:link, a:visited, a:hover, a:active {
 
 /* Bubble, bar, row chart opacity = 80% */
 .dc-chart .bubble {
-    fill-opacity: 0.8;
+  fill-opacity: 0.8;
 }
 .dc-chart .bar {
-    fill-opacity: 0.8;
+  fill-opacity: 0.8;
 }
 .dc-chart g.row rect {
-    fill-opacity: 0.8;
+  fill-opacity: 0.8;
 }
 
 /* Fix to make sure "seed" label shows up */

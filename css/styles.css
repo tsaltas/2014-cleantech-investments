@@ -171,6 +171,23 @@ a:link, a:visited, a:hover, a:active {
   transform: translate(12px, 140px) rotate(270deg);
 }
 
+/* Hide y axis tick marks */
+#quarterly-volume .y .tick line {
+  stroke: #022a3a;
+}
+
+#quarterly-dollars .y .tick line {
+  stroke: #022a3a;
+}
+
+#sector-bubble-chart .y .tick line {
+  stroke: #022a3a;
+}
+
+#stage-bubble-chart .y .tick line {
+  stroke: #022a3a;
+}
+
 /* Bubble, line, row chart opacity = 80% */
 .dc-chart .bubble {
   fill-opacity: 0.8;

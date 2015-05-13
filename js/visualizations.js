@@ -26578,13 +26578,15 @@ $(document).ready(function() {
     .offset([-10, 0])
     .html(function (d) { return "<span style='color: #ff671b'>" +  d.data.key + "</span>: "  + numberFormat(d.value); });
 
-  // tooltips for line chart - number
+  // tooltips for line chart
+  /*
   var lineTip = d3.tip()
     .attr('class', 'd3-tip')
     .offset([-10, 0])
     .html(function (d) {
       return "<span style='color: #ff671b'>" + d.points[d.index].x + "</span>: " + numberFormat(d.points[d.index].y);
     });
+  */
 
   // tooltips for bubble chart
   var bubbleTip = d3.tip()
@@ -26690,18 +26692,28 @@ $(document).ready(function() {
     .xUnits(dc.units.ordinal)
     .colors(["#ff671b"])
     .yAxisLabel('2014 Deals')
+    .renderHorizontalGridLines(true)
+    .title(function (d) {
+      return d.x + ": " + numberFormat(d.y);
+    });
 
   quarterlyDollarChart
-    .renderArea(true)
     .width(350)
     .height(180)
+    .renderArea(true)
+    .brushOn(false)
+    .transitionDuration(1000)
     .dimension(quarterFilterDimension)
     .group(quarterDollarGroup)
     .elasticY(true)
     .x(d3.scale.ordinal().domain(["Q1", "Q2", "Q3", "Q4"]))
     .xUnits(dc.units.ordinal)
     .colors(["#ff671b"])
-    .yAxisLabel('$MM');
+    .yAxisLabel('$MM')
+    .renderHorizontalGridLines(true)
+    .title(function (d) {
+      return d.x + ": " + numberFormat(d.y);
+    });
 
   /********************************************************
   *
@@ -26829,18 +26841,19 @@ $(document).ready(function() {
 
   var sectorDealGroup = sectorDimension.group().reduceCount();
 
-  sectorDealChart.width(275)
-  .height(275)
-  .radius(130)
-  .innerRadius(40)
-  .dimension(sectorFilterDimension)
-  .group(sectorDealGroup)
-  .renderLabel(false)
-  .renderTitle(false)
-  .colors(colorScheme)
-  .colorAccessor(function(d) {
-    return sectorList.indexOf(d.data.key);
-  });
+  sectorDealChart
+    .width(275)
+    .height(275)
+    .radius(130)
+    .innerRadius(40)
+    .dimension(sectorFilterDimension)
+    .group(sectorDealGroup)
+    .renderLabel(false)
+    .renderTitle(false)
+    .colors(colorScheme)
+    .colorAccessor(function(d) {
+      return sectorList.indexOf(d.data.key);
+    });
 
   /********************************************************
   *
@@ -26859,19 +26872,19 @@ $(document).ready(function() {
   });
 
   sectorDollarChart
-  .width(300)
-  .height(500)
-  .margins({top: 20, left: 10, right: 10, bottom: 20})
-  .transitionDuration(750)
-  .dimension(sectorFilterDimension)
-  .group(sectorDollarGroup)
-  .renderLabel(true)
-  .colors(["#ff671b"])
-  .gap(9)
-  .elasticX(true)
-  .renderTitle(false)
-  .ordering(function(d){ return -d.value })
-  .xAxis().ticks(5).tickFormat(d3.format("d"));
+    .width(300)
+    .height(500)
+    .margins({top: 20, left: 10, right: 10, bottom: 20})
+    .transitionDuration(750)
+    .dimension(sectorFilterDimension)
+    .group(sectorDollarGroup)
+    .renderLabel(true)
+    .colors(["#ff671b"])
+    .gap(9)
+    .elasticX(true)
+    .renderTitle(false)
+    .ordering(function(d){ return -d.value })
+    .xAxis().ticks(5).tickFormat(d3.format("d"));
 
   sectorDollarChart.labelOffsetY(11.5);
 
@@ -26929,7 +26942,6 @@ $(document).ready(function() {
   .elasticY(true)
   .elasticX(true)
   .renderHorizontalGridLines(true)
-  .renderVerticalGridLines(true)
   .xAxisLabel('Number of deals')
   .yAxisLabel('Dollars invested ($MM)')
 
@@ -27007,7 +27019,6 @@ $(document).ready(function() {
   .elasticY(true)
   .elasticX(true)
   .renderHorizontalGridLines(true)
-  .renderVerticalGridLines(true)
   .xAxisLabel('Number of deals')
   .yAxisLabel('Dollars invested ($MM)')
 
@@ -27045,10 +27056,12 @@ $(document).ready(function() {
   // render all charts
   dc.renderAll();
 
+  /*
   d3.selectAll(".line").call(lineTip);
   d3.selectAll(".line")
     .on('mouseover', lineTip.show)
     .on('mouseout', lineTip.hide);
+  */
 
 
   d3.selectAll("g.row").call(rowTip);

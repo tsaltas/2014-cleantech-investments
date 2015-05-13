@@ -26724,16 +26724,16 @@ $(document).ready(function() {
   var quarterVolumeChart = dc.pieChart('#quarter-volume');
 
   quarterVolumeChart.width(180)
-  .height(180)
-  .radius(80)
-  .innerRadius(30)
-  .dimension(quarterFilterDimension)
-  .group(quarterVolumeGroup)
-  .colors(["#fff", "#959595", "#363636", "#ff671b"])
-  .label(function (d) {
-    return d.data.key + ": " + d.data.value;
-  })
-  .renderTitle(false)
+    .height(180)
+    .radius(80)
+    .innerRadius(30)
+    .dimension(quarterFilterDimension)
+    .group(quarterVolumeGroup)
+    .colors(["#fff", "#959595", "#363636", "#ff671b"])
+    .label(function (d) {
+      return d.data.key + ": " + d.data.value;
+    })
+    .renderTitle(false)
 
   /********************************************************
   *
@@ -26750,16 +26750,16 @@ $(document).ready(function() {
   var corpVolumeGroup = corpDimension.group().reduceCount();
 
   corpChart.width(180)
-  .height(180)
-  .radius(80)
-  .innerRadius(30)
-  .dimension(corpDimension)
-  .group(corpVolumeGroup)
-  .colors(["#fff", "#ff671b"])
-  .label(function (d) {
-    return d.data.key + ": " + d.data.value;
-  })
-  .renderTitle(false)
+    .height(180)
+    .radius(80)
+    .innerRadius(30)
+    .dimension(corpDimension)
+    .group(corpVolumeGroup)
+    .colors(["#fff", "#ff671b"])
+    .label(function (d) {
+      return d.data.key + ": " + d.data.value;
+    })
+    .renderTitle(false)
 
   /********************************************************
   *
@@ -26812,16 +26812,16 @@ $(document).ready(function() {
   var stageVolumeGroup = stageDimension.group().reduceCount();
 
   stageChart.width(180)
-  .height(180)
-  .radius(80)
-  .innerRadius(30)
-  .dimension(stageFilterDimension)
-  .group(stageVolumeGroup)
-  .colors(["#fff", "#959595", "#363636", "#ff671b"])
-  .label(function (d) {
-    return d.data.key + ": " + d.data.value;
-  })
-  .renderTitle(false)
+    .height(180)
+    .radius(80)
+    .innerRadius(30)
+    .dimension(stageFilterDimension)
+    .group(stageVolumeGroup)
+    .colors(["#fff", "#959595", "#363636", "#ff671b"])
+    .label(function (d) {
+      return d.data.key + ": " + d.data.value;
+    })
+    .renderTitle(false)
 
   /********************************************************
   *
@@ -26897,73 +26897,73 @@ $(document).ready(function() {
   var sectorBubbleChart = dc.bubbleChart('#sector-bubble-chart');
 
   var sectorBubbleGroup = sectorDimension.group().reduce(
-      // callback for when data is added to the current filter results
-      function (p, v) {
-        ++p.dealCount;
-        p.dealDollars += v.amount / 1000000;
-        p.avgSize = p.dealDollars / p.dealCount;
-        return p;
-      },
-      // callback for when data is removed from the current filter results
-      function (p, v) {
-        --p.dealCount;
-        p.dealDollars -= v.amount / 1000000;
-        p.avgSize = p.dealDollars / p.dealCount;
-        return p;
-      },
-      // initialize p
-      function () {
-        return {
-          dealCount: 0,
-          dealDollars: 0,
-          avgSize: 0
-        };
-      }
-      );
+    // callback for when data is added to the current filter results
+    function (p, v) {
+      ++p.dealCount;
+      p.dealDollars += v.amount / 1000000;
+      p.avgSize = p.dealDollars / p.dealCount;
+      return p;
+    },
+    // callback for when data is removed from the current filter results
+    function (p, v) {
+      --p.dealCount;
+      p.dealDollars -= v.amount / 1000000;
+      p.avgSize = p.dealDollars / p.dealCount;
+      return p;
+    },
+    // initialize p
+    function () {
+      return {
+        dealCount: 0,
+        dealDollars: 0,
+        avgSize: 0
+      };
+    }
+  );
 
   sectorBubbleChart
-  .width(710)
-  .height(300)
-  .transitionDuration(1500)
-  .margins({top: 10, right: 50, bottom: 40, left: 50})
-  .dimension(sectorFilterDimension)
-  .group(sectorBubbleGroup)
-  .colors(["#ff671b"])
-  .keyAccessor(function (p) {
-    return p.value.dealCount;
-  })
-  .valueAccessor(function (p) {
-    return p.value.dealDollars;
-  })
-  .radiusValueAccessor(function (p) {
-    return p.value.avgSize;
-  })
-  .maxBubbleRelativeSize(0.07)
-  .elasticY(true)
-  .elasticX(true)
-  .renderHorizontalGridLines(true)
-  .xAxisLabel('Number of deals')
-  .yAxisLabel('Dollars invested ($MM)')
+    .width(710)
+    .height(300)
+    .transitionDuration(1500)
+    .margins({top: 10, right: 50, bottom: 40, left: 50})
+    .dimension(sectorFilterDimension)
+    .group(sectorBubbleGroup)
+    .colors(["#ff671b"])
+    .keyAccessor(function (p) {
+      return p.value.dealCount;
+    })
+    .valueAccessor(function (p) {
+      return p.value.dealDollars;
+    })
+    .radiusValueAccessor(function (p) {
+      return p.value.avgSize;
+    })
+    .maxBubbleRelativeSize(0.07)
+    .elasticY(true)
+    .elasticX(true)
+    .renderHorizontalGridLines(true)
+    .xAxisLabel('Number of deals')
+    .yAxisLabel('Dollars invested ($MM)')
 
-      // specify axes
-      var xRange = d3.extent(sectorBubbleGroup.all(), function(d) {
-        return d.value.dealCount;
-      });
+  // specify axes
+  var xRange = d3.extent(sectorBubbleGroup.all(), function(d) {
+    return d.value.dealCount;
+  });
 
-      var yRange = d3.extent(sectorBubbleGroup.all(), function(d) {
-        return d.value.dealDollars;
-      });
+  var yRange = d3.extent(sectorBubbleGroup.all(), function(d) {
+    return d.value.dealDollars;
+  });
 
-      var rRange = d3.extent(sectorBubbleGroup.all(), function(d) {
-        return d.value.avgSize;
-      });
+  var rRange = d3.extent(sectorBubbleGroup.all(), function(d) {
+    return d.value.avgSize;
+  });
 
-      sectorBubbleChart
-      .x(d3.scale.linear().domain(xRange))
-      .xAxisPadding(xRange[1]/10)
-      .y(d3.scale.linear().domain(yRange))
-      .yAxisPadding(yRange[1]/5)
-      .r(d3.scale.linear().domain(rRange));
+  sectorBubbleChart
+    .x(d3.scale.linear().domain(xRange))
+    .xAxisPadding(xRange[1]/10)
+    .y(d3.scale.linear().domain(yRange))
+    .yAxisPadding(yRange[1]/5)
+    .r(d3.scale.linear().domain(rRange));
 
   /********************************************************
   *
@@ -26974,73 +26974,73 @@ $(document).ready(function() {
   var stageBubbleChart = dc.bubbleChart('#stage-bubble-chart');
 
   var stageBubbleGroup = stageDimension.group().reduce(
-      // callback for when data is added to the current filter results
-      function (p, v) {
-        ++p.dealCount;
-        p.dealDollars += v.amount / 1000000;
-        p.avgSize = p.dealDollars / p.dealCount;
-        return p;
-      },
-      // callback for when data is removed from the current filter results
-      function (p, v) {
-        --p.dealCount;
-        p.dealDollars -= v.amount / 1000000;
-        p.avgSize = p.dealDollars / p.dealCount;
-        return p;
-      },
-      // initialize p
-      function () {
-        return {
-          dealCount: 0,
-          dealDollars: 0,
-          avgSize: 0
-        };
-      }
-      );
+    // callback for when data is added to the current filter results
+    function (p, v) {
+      ++p.dealCount;
+      p.dealDollars += v.amount / 1000000;
+      p.avgSize = p.dealDollars / p.dealCount;
+      return p;
+    },
+    // callback for when data is removed from the current filter results
+    function (p, v) {
+      --p.dealCount;
+      p.dealDollars -= v.amount / 1000000;
+      p.avgSize = p.dealDollars / p.dealCount;
+      return p;
+    },
+    // initialize p
+    function () {
+      return {
+        dealCount: 0,
+        dealDollars: 0,
+        avgSize: 0
+      };
+    }
+  );
 
   stageBubbleChart
-  .width(710)
-  .height(300)
-  .transitionDuration(1500)
-  .margins({top: 10, right: 50, bottom: 40, left: 50})
-  .dimension(stageFilterDimension)
-  .group(stageBubbleGroup)
-  .colors(["#ff671b"])
-  .keyAccessor(function (p) {
-    return p.value.dealCount;
-  })
-  .valueAccessor(function (p) {
-    return p.value.dealDollars;
-  })
-  .radiusValueAccessor(function (p) {
-    return p.value.avgSize;
-  })
-  .maxBubbleRelativeSize(0.07)
-  .elasticY(true)
-  .elasticX(true)
-  .renderHorizontalGridLines(true)
-  .xAxisLabel('Number of deals')
-  .yAxisLabel('Dollars invested ($MM)')
+    .width(710)
+    .height(300)
+    .transitionDuration(1500)
+    .margins({top: 10, right: 50, bottom: 40, left: 50})
+    .dimension(stageFilterDimension)
+    .group(stageBubbleGroup)
+    .colors(["#ff671b"])
+    .keyAccessor(function (p) {
+      return p.value.dealCount;
+    })
+    .valueAccessor(function (p) {
+      return p.value.dealDollars;
+    })
+    .radiusValueAccessor(function (p) {
+      return p.value.avgSize;
+    })
+    .maxBubbleRelativeSize(0.07)
+    .elasticY(true)
+    .elasticX(true)
+    .renderHorizontalGridLines(true)
+    .xAxisLabel('Number of deals')
+    .yAxisLabel('Dollars invested ($MM)')
 
-      // specify axes
-      var xRange = d3.extent(stageBubbleGroup.all(), function(d) {
-        return d.value.dealCount;
-      });
+  // specify axes
+  var xRange = d3.extent(stageBubbleGroup.all(), function(d) {
+    return d.value.dealCount;
+  });
 
-      var yRange = d3.extent(stageBubbleGroup.all(), function(d) {
-        return d.value.dealDollars;
-      });
+  var yRange = d3.extent(stageBubbleGroup.all(), function(d) {
+    return d.value.dealDollars;
+  });
 
-      var rRange = d3.extent(stageBubbleGroup.all(), function(d) {
-        return d.value.avgSize;
-      });
+  var rRange = d3.extent(stageBubbleGroup.all(), function(d) {
+    return d.value.avgSize;
+  });
 
-      stageBubbleChart
-      .x(d3.scale.linear().domain(xRange))
-      .xAxisPadding(xRange[1]/10)
-      .y(d3.scale.linear().domain(yRange))
-      .yAxisPadding(yRange[1]/4)
-      .r(d3.scale.linear().domain(rRange));
+  stageBubbleChart
+    .x(d3.scale.linear().domain(xRange))
+    .xAxisPadding(xRange[1]/10)
+    .y(d3.scale.linear().domain(yRange))
+    .yAxisPadding(yRange[1]/4)
+    .r(d3.scale.linear().domain(rRange));
 
 
   /********************************************************

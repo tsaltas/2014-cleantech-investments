@@ -188,20 +188,29 @@ a:link, a:visited, a:hover, a:active {
   stroke: #022a3a;
 }
 
-/* Hide x axis tick marks */
+/* Hide x axis tick marks and soften y axis gridlines */
 #sector-dollars .tick line {
   stroke: #022a3a;
 }
 #sector-dollars .tick .grid-line {
-  stroke: #fff;
+  fill: none;
+  stroke: #ccc;
+  opacity: 0.3;
+  shape-rendering: crispEdges;
 }
 
-/* Move label to left */
+/* Move label to left
 #sector-dollars text {
   transform: translate(-163px, 0px);
 }
 #sector-dollars .axis text{
   transform: translate(0, 0);
+}
+*/
+
+/* Soften label */
+#sector-dollars text {
+  font-weight: 300;
 }
 
 /* Bubble, line, row chart opacity = 80% */
@@ -245,4 +254,29 @@ Other text labels will default to white */
   color: #022a3a;
   border-radius: 5px;
   padding: 5px;
+}
+
+#quarterly-dollars .dc-tooltip .dot {
+  fill: #fff;
+  fill-opacity: 1 !important;
+}
+
+#quarterly-volume .dc-tooltip .dot {
+  fill: #fff;
+  fill-opacity: 1 !important;
+}
+
+#quarterly-dollars .dc-tooltip .xRef {
+  display: none;
+}
+
+#quarterly-dollars .dc-tooltip .yRef {
+  display: none;
+}
+
+#quarterly-volume .dc-tooltip .xRef {
+  display: none;
+}
+#quarterly-volume .dc-tooltip .yRef {
+  display: none;
 }

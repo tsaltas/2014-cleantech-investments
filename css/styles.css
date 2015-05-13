@@ -188,6 +188,22 @@ a:link, a:visited, a:hover, a:active {
   stroke: #022a3a;
 }
 
+/* Hide x axis tick marks */
+#sector-dollars .tick line {
+  stroke: #022a3a;
+}
+#sector-dollars .tick .grid-line {
+  stroke: #fff;
+}
+
+/* Move label to left */
+#sector-dollars text {
+  transform: translate(-163px, 0px);
+}
+#sector-dollars .axis text{
+  transform: translate(0, 0);
+}
+
 /* Bubble, line, row chart opacity = 80% */
 .dc-chart .bubble {
   fill-opacity: 0.8;

@@ -26678,9 +26678,10 @@ $(document).ready(function() {
   });
 
   quarterlyVolumeChart
-    .renderArea(true)
     .width(350)
     .height(180)
+    .renderArea(true)
+    .brushOn(false)
     .transitionDuration(1000)
     .dimension(quarterFilterDimension)
     .group(quarterVolumeGroup)
@@ -26688,7 +26689,7 @@ $(document).ready(function() {
     .x(d3.scale.ordinal().domain(["Q1", "Q2", "Q3", "Q4"]))
     .xUnits(dc.units.ordinal)
     .colors(["#ff671b"])
-    .yAxisLabel('2014 Deals');
+    .yAxisLabel('2014 Deals')
 
   quarterlyDollarChart
     .renderArea(true)

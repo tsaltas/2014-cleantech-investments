@@ -84,10 +84,10 @@ body {
   width: 600px;
 }
 .row-chart {
-  width: 450px;
+  width: 650px;
 }
 .pie-chart {
-  width: 325px;
+  width: 650px;
 }
 .bubble-chart {
   width: 760px;
@@ -113,6 +113,17 @@ a:link, a:visited, a:hover, a:active {
 }
 
 /* Chart styles */
+
+/* Hidden filter notes */
+
+.reset-hidden {
+  font-weight: 300;
+  width: 600px;
+}
+
+.filter-label {
+  font-weight: 400;
+}
 
 /* Chart titles */
 .chart-title {
@@ -220,6 +231,11 @@ a:link, a:visited, a:hover, a:active {
 /* Soften label */
 #sector-dollars text {
   font-weight: 300;
+}
+
+/* Remove white border on selected slice in pie chart */
+#sector-deals .selected path {
+  stroke: #022a3a;
 }
 
 /* Bubble, line, row chart opacity = 80% */

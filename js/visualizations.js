@@ -27076,6 +27076,13 @@ $(document).ready(function() {
 
   d3.selectAll(".bubble").call(bubbleTip);
   d3.selectAll(".bubble")
-    .on('mouseover', bubbleTip.show)
-    .on('mouseout', bubbleTip.hide);
+    .on('mouseover', function(d, i) {
+        bubbleTip.show(d);
+        this.setAttribute("class", "highlighted-bubble");
+    })
+    .on('mouseout', bubbleTip.hide)
+    .on('mouseout', function(d, i) {
+        bubbleTip.hide();
+        this.removeAttribute("class", "highlighted-bubble");
+    });
 });

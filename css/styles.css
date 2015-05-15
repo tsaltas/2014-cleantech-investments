@@ -239,6 +239,10 @@ a:link, a:visited, a:hover, a:active {
 }
 
 /* Bubble, line, row chart opacity = 80% */
+.dc-chart circle {
+  opacity: 1;
+  fill-opacity: 0.8;
+}
 .dc-chart .bubble {
   fill-opacity: 0.8;
 }
@@ -247,6 +251,27 @@ a:link, a:visited, a:hover, a:active {
 }
 .dc-chart g.row rect {
   fill-opacity: 0.8;
+}
+
+/* Only show labels on sector bubble chart  for highlighted bubbles */
+#sector-bubble-chart .node text{
+  display: none;
+}
+#sector-bubble-chart .selected > text{
+  display: initial;
+}
+/*
+#sector-bubble-chart .highlighted-bubble + text {
+  display: initial;
+}
+*/
+
+/* Highlight bubbles on mouseover */
+.highlighted-bubble {
+  fill-opacity: 1 !important;
+  opacity: 1 !important;
+  stroke: #fff;
+  stroke-width: 2px;
 }
 
 /* Line chart stroke (top of chart) color = white */

@@ -271,7 +271,7 @@ a:link, a:visited, a:hover, a:active {
   fill-opacity: 1 !important;
   opacity: 1 !important;
   stroke: #fff;
-  stroke-width: 2px;
+  stroke-width: 1px;
 }
 
 /* Line chart stroke (top of chart) color = white */

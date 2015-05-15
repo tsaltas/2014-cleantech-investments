@@ -266,12 +266,17 @@ a:link, a:visited, a:hover, a:active {
 }
 */
 
-/* Highlight bubbles on mouseover */
-.highlighted-bubble {
+/* Highlight bubbles on mouseover / selection */
+.dc-chart .highlighted-bubble {
   fill-opacity: 1 !important;
   opacity: 1 !important;
   stroke: #fff;
-  stroke-width: 1px;
+  stroke-width: 2px;
+}
+.dc-chart .selected circle {
+  fill-opacity: 1;
+  stroke: #fff;
+  stroke-width: 2px;
 }
 
 /* Line chart stroke (top of chart) color = white */

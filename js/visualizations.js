@@ -26579,14 +26579,12 @@ $(document).ready(function() {
     .html(function (d) { return "<span style='color: #ff671b'>" +  d.data.key + "</span>: "  + numberFormat(d.value); });
 
   // tooltips for line chart
-  /*
   var lineTip = d3.tip()
     .attr('class', 'd3-tip')
     .offset([-10, 0])
     .html(function (d) {
-      return "<span style='color: #ff671b'>" + d.points[d.index].x + "</span>: " + numberFormat(d.points[d.index].y);
+      return "<span style='color: #ff671b'>" + d.x + "</span>: " + numberFormat(d.y);
     });
-  */
 
   // tooltips for bubble chart
   var bubbleTip = d3.tip()
@@ -27045,7 +27043,7 @@ $(document).ready(function() {
 
   /********************************************************
   *
-  *   Metrics and widgets for entire page
+  *   Metrics and widgets for entire page, render charts
   *
   ********************************************************/
   // create a data count widget and use css selector as anchor
@@ -27056,13 +27054,14 @@ $(document).ready(function() {
   // render all charts
   dc.renderAll();
 
-  /*
-  d3.selectAll(".line").call(lineTip);
-  d3.selectAll(".line")
+  // Make datapoint dots smaller (default = 5)
+  d3.selectAll(".dot").attr("r", "3");
+
+  // Render tooltips on mouseover
+  d3.selectAll(".dot").call(lineTip);
+  d3.selectAll(".dot")
     .on('mouseover', lineTip.show)
     .on('mouseout', lineTip.hide);
-  */
-
 
   d3.selectAll("g.row").call(rowTip);
   d3.selectAll("g.row")
@@ -27085,4 +27084,5 @@ $(document).ready(function() {
         bubbleTip.hide();
         this.removeAttribute("class", "highlighted-bubble");
     });
+
 });

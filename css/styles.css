@@ -233,9 +233,9 @@ a:link, a:visited, a:hover, a:active {
   font-weight: 300;
 }
 
-/* Remove white border on selected slice in pie chart */
-#sector-deals .selected path {
-  stroke: #022a3a;
+/* Remove white border on selected slice in pie charts */
+.pie-slice.selected path {
+  stroke-width: 0px;
 }
 
 /* Bubble, line, row chart opacity = 80% */

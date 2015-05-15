@@ -88,7 +88,7 @@ body {
   width: 700px;
 }
 .row-chart {
-  width: 350px;
+  width: 450px;
 }
 .pie-chart {
   width: 325px;
@@ -199,14 +199,19 @@ a:link, a:visited, a:hover, a:active {
   shape-rendering: crispEdges;
 }
 
-/* Move label to left
+/* Move row chart labels to left of the graph */
 #sector-dollars text {
   transform: translate(-163px, 0px);
 }
 #sector-dollars .axis text{
   transform: translate(0, 0);
 }
-*/
+#sector-dollars svg {
+  width: 450px;
+}
+#sector-dollars > svg > g {
+  transform: translate(163px, 20px);
+}
 
 /* Soften label */
 #sector-dollars text {

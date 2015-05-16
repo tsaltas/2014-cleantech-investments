@@ -27040,9 +27040,6 @@ $(document).ready(function() {
     .yAxisPadding(yRange[1]/2 + rRange[1])
     .r(d3.scale.linear().domain(rRange));
 
-console.log(rRange[1]);
-
-
   /********************************************************
   *
   *   Metrics and widgets for entire page, render charts
@@ -27058,6 +27055,18 @@ console.log(rRange[1]);
 
   // Make datapoint dots smaller (default = 5)
   d3.selectAll(".dot").attr("r", "3");
+
+  // Highlight sectors in bubble chart when selected in pie chart
+  d3.selectAll("#sector-deals .pie-slice")
+    .on('click', function(d, i) {
+      var bubble = d3.selectAll("#sector-bubble-chart .bubble._" + i)
+      bubble.select(function() {return this.parentNode;}).attr("class", "node selected");
+    });
+  // Un-highlight when filters reset
+  d3.selectAll("#sector-deals .reset")
+    .on('click', function() {
+      d3.selectAll("#sector-bubble-chart .node.selected").attr("class", "node");
+    });
 
   // Render tooltips on mouseover
   d3.selectAll(".dot").call(lineTip);
@@ -27077,14 +27086,17 @@ console.log(rRange[1]);
 
   d3.selectAll(".bubble").call(bubbleTip);
   d3.selectAll(".bubble")
+    // Highlight on mouseover
     .on('mouseover', function(d, i) {
+        d3.select(this)
+          .attr("class", "bubble _" + i + " highlighted-bubble");
         bubbleTip.show(d);
-        this.setAttribute("class", "highlighted-bubble");
     })
-    .on('mouseout', bubbleTip.hide)
+    // Remove highlight on mouseout
     .on('mouseout', function(d, i) {
+        d3.select(this)
+          .attr("class", "bubble _" + i);
         bubbleTip.hide();
-        this.removeAttribute("class", "highlighted-bubble");
     });
 
 });

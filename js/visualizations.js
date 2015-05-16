@@ -26960,7 +26960,7 @@ $(document).ready(function() {
     .x(d3.scale.linear().domain(xRange))
     .xAxisPadding(xRange[1]/5)
     .y(d3.scale.linear().domain(yRange))
-    .yAxisPadding(yRange[1]/2 + rRange[1])
+    .yAxisPadding(yRange[1]/1.75)
     .r(d3.scale.linear().domain(rRange));
 
   /********************************************************
@@ -27037,7 +27037,7 @@ $(document).ready(function() {
     .x(d3.scale.linear().domain(xRange))
     .xAxisPadding(xRange[1]/5)
     .y(d3.scale.linear().domain(yRange))
-    .yAxisPadding(yRange[1]/2 + rRange[1])
+    .yAxisPadding(yRange[1]/1.75)
     .r(d3.scale.linear().domain(rRange));
 
   /********************************************************

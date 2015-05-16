@@ -26936,7 +26936,7 @@ $(document).ready(function() {
     .radiusValueAccessor(function (p) {
       return p.value.avgSize;
     })
-    .maxBubbleRelativeSize(0.07)
+    .maxBubbleRelativeSize(0.05)
     .elasticY(true)
     .elasticX(true)
     .renderHorizontalGridLines(true)
@@ -26958,9 +26958,9 @@ $(document).ready(function() {
 
   sectorBubbleChart
     .x(d3.scale.linear().domain(xRange))
-    .xAxisPadding(xRange[1]/10)
+    .xAxisPadding(xRange[1]/5)
     .y(d3.scale.linear().domain(yRange))
-    .yAxisPadding(yRange[1]/3)
+    .yAxisPadding(yRange[1]/2 + rRange[1])
     .r(d3.scale.linear().domain(rRange));
 
   /********************************************************
@@ -27013,7 +27013,7 @@ $(document).ready(function() {
     .radiusValueAccessor(function (p) {
       return p.value.avgSize;
     })
-    .maxBubbleRelativeSize(0.07)
+    .maxBubbleRelativeSize(0.05)
     .elasticY(true)
     .elasticX(true)
     .renderHorizontalGridLines(true)
@@ -27035,10 +27035,12 @@ $(document).ready(function() {
 
   stageBubbleChart
     .x(d3.scale.linear().domain(xRange))
-    .xAxisPadding(xRange[1]/10)
+    .xAxisPadding(xRange[1]/5)
     .y(d3.scale.linear().domain(yRange))
-    .yAxisPadding(yRange[1]/3)
+    .yAxisPadding(yRange[1]/2 + rRange[1])
     .r(d3.scale.linear().domain(rRange));
+
+console.log(rRange[1]);
 
 
   /********************************************************

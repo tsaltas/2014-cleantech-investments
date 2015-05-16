@@ -1,9 +1,9 @@
 /*
 * Javascript for i3 Cleantech Investments Data Visualizations
 * Author: Shannon Tsaltas
-* Date: May, 2015
-* Version: 2.0
-* Build using:
+* Date: June, 2015
+* Built using:
+*     JQuery
 *     d3.js (http://d3js.org/)
 *     DC.js (http://dc-js.github.io/dc.js/)
 *     Crossfilter.js (http://square.github.io/crossfilter/)
